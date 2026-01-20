@@ -504,18 +504,11 @@ ninja.data = [{
           window.open("mailto:%63%68%61%6E%67%72%75%69.%7A%68%75.%31%39@%75%63%6C.%61%63.%75%6B", "_blank");
         },
       },{
-        id: 'social-google_scholar',
-        title: 'Google_scholar',
-        section: 'Socials',
-        handler: () => {
-          window.open("", "_blank");
-        },
-      },{
         id: 'social-linkedin',
-        title: 'Linkedin',
+        title: 'LinkedIn',
         section: 'Socials',
         handler: () => {
-          window.open("", "_blank");
+          window.open("https://www.linkedin.com/in/changrui-zhu-b078031bb", "_blank");
         },
       },{
         id: 'social-rss',
