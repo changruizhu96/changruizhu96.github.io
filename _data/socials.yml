@@ -11,8 +11,8 @@
 # dblp_url: # your DBLP profile url
 # discord_id: # your discord id (18-digit unique numerical identifier)
 email: changrui.zhu.19@ucl.ac.uk # your email address
-google_scholar: https://scholar.google.com/citations?user=gjFTZ9EAAAAJ&hl=en
-linkedin: https://www.linkedin.com/in/changrui-zhu-b078031bb/
+#google_scholar: https://scholar.google.com/citations?user=gjFTZ9EAAAAJ&hl=en
+#linkedin: https://www.linkedin.com/in/changrui-zhu-b078031bb/
 # facebook_id: # your facebook id
 # flickr_id: # your flickr id
 # github_username: # your GitHub user name
@@ -26,7 +26,7 @@ linkedin: https://www.linkedin.com/in/changrui-zhu-b078031bb/
 # lastfm_id: # your lastfm id
 # lattes_id: # your ID on Lattes (Brazilian Lattes CV)
 # leetcode_id: # your LeetCode id
-# linkedin_username: # your LinkedIn user name
+linkedin_username: changrui-zhu-b078031bb # your LinkedIn user name
 # mastodon_username: # your mastodon instance+username in the format instance.tld/@username
 # medium_username: # your Medium username
 # orcid_id: # your ORCID ID
