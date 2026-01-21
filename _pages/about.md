@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
+subtitle: <a href='#'>Affiliations</a>. Address: Gower Street, London, WC1E 6BT. Contacts: changrui.zhu.19@uclac.uk.
 
 profile:
   align: right
