@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Contacts: changrui.zhu.19@ucl.ac.uk.
+subtitle: <a href='#'>Affiliations</a>. 
 
 profile:
   align: right
