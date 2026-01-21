@@ -28,7 +28,9 @@ latest_posts:
 ---
 I am a PhD student at University College London (UCL), supervised by Prof. Simon Julier. I obtained my bachelor's degree in EEE from the University of Glasgow, and then I went to UCL for an MSc in robotics and computation.  
 
-My research focuses on developing perceptually-grounded human-in-the-loop intelligent systems. I am committed to advancing Mixed Reality and VR/HCI systems that enable reliable perception and interaction in complex 3D environments. My work combines Unity-based VR/MR system development with 3D reconstruction and corresponding registration methods, and I validate these through controlled user studies, which are analysed with mixed-effects modelling to understand how display type, 3D reconstruction, and interaction design shape human performance.
+My research focuses on developing perceptually-grounded human-in-the-loop intelligent systems. I am committed to advancing VR/AR/MR and HCI systems that enable reliable perception and interaction in complex 3D environments. 
+
+My work combines Unity-based VR/MR system development with 3D reconstruction and corresponding registration methods, and I validate these through controlled user studies, which are analysed with mixed-effects modelling to understand how display type, 3D reconstruction, and interaction design shape human performance.
 
 I'm also a self-taught photographer, but I haven't been particularly active since 2024. Some old pictures could be found via [my Instagram](https://www.instagram.com/changruizhu/?hl=en-gb) 
 
