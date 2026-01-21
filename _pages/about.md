@@ -26,6 +26,9 @@ latest_posts:
   scrollable: true # adds a vertical scroll bar if there are more than 3 new posts items
   limit: 3 # leave blank to include all the blog posts
 ---
-I am a Ph.D. student at University College London (UCL), exploring the frontiers of Virtual Reality (VR) and Mixed Reality (MR). My research focuses on developing perceptually-grounded human-in-the-loop change detection systems. I am passionate about creating immersive experiences that seamlessly connect the virtual and real worlds.
-I'm also a self-taught photographer, but not particularly active since 2023. Some old picture could be find [Font Awesome icons](https://www.instagram.com/changruizhu/?hl=en-gb) 
+I am a PhD student at University College London (UCL) under the supervision of Prof. Simon Julier.
+
+I obtained my bachelor's degree in EEE from the University of Glasgow, and then I went to UCL for an MSc in robotics and computation.  
+My research focuses on developing perceptually-grounded human-in-the-loop intelligent systems. I am passionate about creating immersive experiences that seamlessly connect the virtual and real worlds.
+I'm also a self-taught photographer, but I haven't been particularly active since 2024. Some old pictures could be found via [my Instagram](https://www.instagram.com/changruizhu/?hl=en-gb) 
 
