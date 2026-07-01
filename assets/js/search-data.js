@@ -78,8 +78,8 @@ ninja.data = [{
           section: "Projects",handler: () => {
               window.location.href = "/projects/9_project/";
             },},{id: "projects-mr-compare",
-          title: 'MR Compare',
-          description: "Mixed reality registration and visual comparison for reconstructed 3D scenes.",
+          title: 'MR-Compare',
+          description: "Conditionally accepted at IEEE ISMAR 2026.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/mr-compare/";
             },},{
