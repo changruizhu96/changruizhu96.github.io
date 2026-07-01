@@ -46,10 +46,28 @@ _styles: >
     font-size: 1.05rem;
     margin-bottom: 0.3rem;
   }
+  .paper-authors a {
+    color: var(--global-text-color);
+  }
+  .paper-authors sup,
+  .paper-affiliations sup {
+    color: var(--global-theme-color);
+    font-size: 0.7rem;
+    margin-left: 0.08rem;
+  }
   .paper-affiliations {
     color: var(--global-text-color-light);
     font-size: 0.95rem;
-    margin-bottom: 1.2rem;
+    line-height: 1.55;
+    margin-bottom: 0.45rem;
+  }
+  .paper-emails {
+    color: var(--global-text-color-light);
+    font-size: 0.86rem;
+    line-height: 1.55;
+    margin: 0 auto 1.2rem;
+    max-width: 780px;
+    overflow-wrap: anywhere;
   }
   .paper-links {
     display: flex;
@@ -96,6 +114,47 @@ _styles: >
   .paper-section p {
     font-size: 1.02rem;
     line-height: 1.72;
+  }
+  .paper-figure {
+    margin: 1rem auto 0.35rem;
+  }
+  .paper-figure-caption {
+    color: var(--global-text-color-light);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    margin: 0 auto 1.2rem;
+    max-width: 900px;
+    text-align: center;
+  }
+  .paper-two-col {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    margin-top: 1rem;
+  }
+  .paper-two-col .paper-figure-caption {
+    text-align: left;
+  }
+  .paper-pipeline {
+    display: grid;
+    gap: 0.8rem;
+    margin-top: 1.25rem;
+  }
+  .paper-pipeline-step {
+    border-top: 1px solid var(--global-divider-color);
+    padding-top: 0.8rem;
+  }
+  .paper-pipeline-step strong {
+    color: var(--global-theme-color);
+    display: block;
+    font-size: 0.98rem;
+    margin-bottom: 0.25rem;
+  }
+  .paper-pipeline-step p {
+    color: var(--global-text-color-light);
+    font-size: 0.96rem;
+    line-height: 1.62;
+    margin-bottom: 0;
   }
   .paper-highlight-grid {
     display: grid;
@@ -154,8 +213,18 @@ _styles: >
     <p class="paper-subtitle">
       A Mixed-Reality Framework for Spatially Grounded Visual Comparison of Heterogeneous 3D Reconstructions with Reality
     </p>
-    <div class="paper-authors">Changrui Zhu et al.</div>
-    <div class="paper-affiliations">University College London</div>
+    <div class="paper-authors">
+      <a href="mailto:changrui.zhu.19@ucl.ac.uk">Changrui Zhu</a><sup>1</sup>,
+      <a href="mailto:ernst.kruijff@h-brs.de">Ernst Kruijff</a><sup>2</sup>,
+      <a href="mailto:pengju.zhang.21@ucl.ac.uk">Pengju Zhang</a><sup>1</sup>,
+      <a href="mailto:s.julier@ucl.ac.uk">Simon Julier</a><sup>1</sup>
+    </div>
+    <div class="paper-affiliations">
+      <sup>1</sup>University College London &nbsp;&nbsp; <sup>2</sup>Hochschule Bonn-Rhein-Sieg
+    </div>
+    <div class="paper-emails">
+      changrui.zhu.19@ucl.ac.uk | ernst.kruijff@h-brs.de | pengju.zhang.21@ucl.ac.uk | s.julier@ucl.ac.uk
+    </div>
 
     <div class="paper-links">
       <span class="paper-button disabled">
@@ -195,6 +264,19 @@ _styles: >
   </section>
 
   <section class="paper-section">
+    <h2>What does MR-Compare show?</h2>
+    <p>
+      The system is designed for situations where the physical room is still accessible but the user also has reconstructed digital versions of that room. MR-Compare registers each reconstruction to the live MR coordinate system, so the user can inspect where a reconstruction agrees with, deviates from, or visually complements the current physical environment.
+    </p>
+    <div class="paper-figure">
+      {% include figure.liquid loading="eager" path="assets/img/mr-compare/visual-comparison.jpg" title="Visual comparison examples" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="paper-figure-caption">
+      Examples of registered reconstructions in two physical rooms. The columns compare mesh and 3DGS workflows, including desktop and mobile capture pipelines.
+    </div>
+  </section>
+
+  <section class="paper-section">
     <h2>Method</h2>
     <div class="paper-highlight-grid">
       <div class="paper-highlight">
@@ -212,6 +294,28 @@ _styles: >
       <div class="paper-highlight">
         <h3>3D Slider</h3>
         <p>A geometry-driven MR mask lets users slide between reconstruction and live VST for spatial comparison.</p>
+      </div>
+    </div>
+    <div class="paper-pipeline">
+      <div class="paper-pipeline-step">
+        <strong>Fig. 1a. Source point collection</strong>
+        <p>Each reconstruction is converted into a source point cloud: mesh vertices for mesh workflows and Gaussian centres for 3DGS workflows. A radius crop and optional voxel-hash density filter remove distant background content, skyboxes, and isolated floating points before registration.</p>
+      </div>
+      <div class="paper-pipeline-step">
+        <strong>Fig. 1b. Target point collection</strong>
+        <p>The Quest-side target cloud is built from the Meta Quest 3 Depth API. A point cloud generator raycasts screen-space samples into world-space points, while chunked storage and density caps keep the scan practical for in-headset use.</p>
+      </div>
+      <div class="paper-pipeline-step">
+        <strong>Fig. 1c. Coarse registration</strong>
+        <p>After voxelisation reduces density mismatch, FPFH-based correspondences provide a global initialisation. MR-Compare supports robust coarse estimators such as TEASER++ and TurboReg, producing an initial alignment between reconstruction and headset scan.</p>
+      </div>
+      <div class="paper-pipeline-step">
+        <strong>Fig. 1d. Fine registration</strong>
+        <p>The coarse transform is refined with G-ICP or V-GICP through the small_gicp backend. The resulting transform is persisted in the Quest world coordinate system so the aligned asset remains spatially grounded during comparison.</p>
+      </div>
+      <div class="paper-pipeline-step">
+        <strong>Fig. 1e. XR interactive comparison</strong>
+        <p>The final interface combines the registered reconstruction with live video see-through. A geometry-driven 3D Slider uses a movable volumetric alpha mask, letting users reveal reconstruction and physical-world content in the same spatial frame.</p>
       </div>
     </div>
   </section>
@@ -239,6 +343,36 @@ _styles: >
         <span>Training-free 3DGS source pruning evaluated on Replica scenes.</span>
       </div>
     </div>
+    <p>
+      A second controlled Replica evaluation complements the real-world study. It uses eight NICE-SLAM Replica indoor scenes, reconstructs each scene with 3DGS and 3DGS-MCMC, and generates Quest-like target scans from the Replica meshes to isolate registration behaviour under reproducible conditions.
+    </p>
+    <p>
+      In this setting, MR-Compare evaluates a zero-shot anisotropy filter for 3DGS source point selection. Sweeping the anisotropy threshold shows that moderate pruning can rescue failed registrations and reduce both translation and rotation error. The reported gains are larger for standard 3DGS, with reductions of 0.35 cm / 37.6% and 0.08 degrees / 38.7%, while 3DGS-MCMC improves by 0.12 cm / 16.9% and 0.04 degrees / 29.1%.
+    </p>
+    <div class="paper-figure">
+      {% include figure.liquid loading="lazy" path="assets/img/mr-compare/replica-anisotropy.jpg" title="Replica anisotropy filter evaluation" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="paper-figure-caption">
+      Replica tau-sweep heatmaps for translation and rotation errors. Moderate anisotropy pruning improves robustness and accuracy, especially for standard 3DGS.
+    </div>
+    <div class="paper-two-col">
+      <div>
+        <div class="paper-figure">
+          {% include figure.liquid loading="lazy" path="assets/img/mr-compare/registration-ratings.jpg" title="Registration ratings" class="img-fluid rounded z-depth-1" %}
+        </div>
+        <div class="paper-figure-caption">
+          Predicted response distributions for subjective registration ratings across rooms and reconstruction workflows.
+        </div>
+      </div>
+      <div>
+        <div class="paper-figure">
+          {% include figure.liquid loading="lazy" path="assets/img/mr-compare/visual-consistency.jpg" title="Visual consistency ratings" class="img-fluid rounded z-depth-1" %}
+        </div>
+        <div class="paper-figure-caption">
+          Predicted response distributions for visual consistency dimensions, including clarity, depth, completeness, geometry, and recognizability.
+        </div>
+      </div>
+    </div>
   </section>
 
   <section class="paper-section">
@@ -252,7 +386,7 @@ _styles: >
     <h2>BibTeX</h2>
 <pre class="paper-bibtex">@misc{zhu2026mrcompare,
   title  = {MR-Compare: A Mixed-Reality Framework for Spatially Grounded Visual Comparison of Heterogeneous 3D Reconstructions with Reality},
-  author = {Zhu, Changrui and others},
+  author = {Zhu, Changrui and Kruijff, Ernst and Zhang, Pengju and Julier, Simon},
   year   = {2026},
   note   = {Conditionally accepted at IEEE ISMAR 2026}
 }</pre>
