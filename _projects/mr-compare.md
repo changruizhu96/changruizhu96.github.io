@@ -1,7 +1,7 @@
 ---
 layout: page
-title: MR Compare
-description: Mixed reality registration and visual comparison for reconstructed 3D scenes.
+title: MR-Compare
+description: Conditionally accepted at IEEE ISMAR 2026.
 img: assets/img/mr-compare/teaser.jpg
 importance: 0
 category: work
@@ -16,6 +16,21 @@ _styles: >
     color: var(--global-text-color-light);
     font-size: 1rem;
     margin-bottom: 1rem;
+  }
+  .mr-paper-title {
+    font-size: 1.15rem;
+    line-height: 1.55;
+    margin: 0 auto 0.8rem;
+    max-width: 900px;
+  }
+  .mr-status-badge {
+    border: 1px solid var(--global-theme-color);
+    border-radius: 999px;
+    color: var(--global-theme-color);
+    display: inline-flex;
+    font-size: 0.92rem;
+    margin-bottom: 1rem;
+    padding: 0.35rem 0.75rem;
   }
   .mr-link-row {
     display: flex;
@@ -88,7 +103,11 @@ _styles: >
 ---
 
 <div class="mr-project-hero">
-  <div class="mr-author-line">Changrui Zhu</div>
+  <div class="mr-paper-title">
+    MR-Compare: A Mixed-Reality Framework for Spatially Grounded Visual Comparison of Heterogeneous 3D Reconstructions with Reality
+  </div>
+  <div class="mr-author-line">Changrui Zhu et al.</div>
+  <div class="mr-status-badge">Conditionally accepted at IEEE ISMAR 2026</div>
   <div class="mr-link-row">
     <a class="mr-link-button" href="https://github.com/changruizhu96/MR-Compare" target="_blank" rel="noopener noreferrer">
       <i class="fa-brands fa-github"></i>
@@ -113,73 +132,71 @@ _styles: >
   {% include figure.liquid loading="eager" path="assets/img/mr-compare/teaser.jpg" title="MR Compare system workflow" class="img-fluid rounded z-depth-1" %}
 </div>
 <div class="caption">
-  MR Compare aligns a reconstructed source scene, such as a 3D Gaussian Splatting asset or mesh, with a Quest-side target representation and supports in-headset visual comparison.
+  MR-Compare registers heterogeneous 3D reconstructions to the physical world and supports spatially grounded visual comparison in mixed reality.
 </div>
 
 ## Overview
 
 <p class="mr-section-lead">
-MR Compare is a Unity-based mixed reality system for registering reconstructed 3D scenes against a user's current physical environment. It is designed for workflows where a user brings a reconstructed scene, either as a 3D Gaussian Splatting asset or as a mesh, and aligns it with the real environment captured or represented by Meta Quest.
+MR-Compare is a spatially grounded mixed reality framework for comparing heterogeneous 3D reconstructions with the live physical world. Implemented on Meta Quest 3, it aligns mesh and 3D Gaussian Splatting reconstructions to the headset's world coordinate system and lets users compare the reconstructed past with the live video see-through present.
 </p>
 
-The project focuses on three tasks:
+The paper studies three connected problems:
 
-- deriving source and target point cloud representations from reconstructed assets and Quest-side scene data;
-- registering the reconstruction to the physical environment through robust coarse alignment and fine refinement;
-- comparing the registered reconstruction with passthrough in a mixed reality headset.
+- deriving source and target point clouds from heterogeneous reconstruction outputs and Quest-side scene sensing;
+- registering reconstructed assets to the physical environment with a self-contained coarse-to-fine Unity pipeline;
+- supporting perceptually grounded in-headset comparison through an interactive 3D Slider.
 
 ## Method
 
 <div class="mr-feature-grid">
   <div class="mr-feature">
-    <h3>Source Representation</h3>
-    <p>Imports a reconstructed scene as either a 3D Gaussian Splatting asset or Unity mesh and extracts registration points from the source geometry.</p>
+    <h3>Heterogeneous Inputs</h3>
+    <p>Supports mesh and 3DGS reconstructions by converting each source representation into registration-ready point clouds.</p>
   </div>
   <div class="mr-feature">
     <h3>Quest Target</h3>
-    <p>Builds a target point representation from a saved Quest scan, real-time scan, room mesh, or effect mesh.</p>
+    <p>Builds a target point representation from Quest-side depth and scene information for spatial grounding in the physical room.</p>
   </div>
   <div class="mr-feature">
-    <h3>Coarse Registration</h3>
-    <p>Uses voxelisation, FPFH features, and TEASER++ to recover a robust initial alignment under noisy correspondences.</p>
+    <h3>Registration</h3>
+    <p>Combines robust global alignment with fine refinement, using TEASER++ or TurboReg for coarse registration and G-ICP or V-GICP for refinement.</p>
   </div>
   <div class="mr-feature">
-    <h3>Fine Registration</h3>
-    <p>Refines the final transform with GICP or VGICP once the source and target point clouds have reasonable overlap.</p>
+    <h3>3D Slider</h3>
+    <p>Uses geometry-driven masking to slide between the reconstruction and live VST, enabling direct spatial comparison inside MR.</p>
   </div>
 </div>
 
 The high-level pipeline is:
 
 <ol class="mr-pipeline-list">
-  <li>Collect source data with a phone, camera, or desktop reconstruction workflow.</li>
+  <li>Collect source data using desktop or mobile reconstruction workflows.</li>
   <li>Import the source scene as a mesh or 3DGS asset.</li>
-  <li>Extract source points from the reconstructed representation.</li>
-  <li>Collect target points from Quest scene data, saved scans, room meshes, or effect meshes.</li>
-  <li>Run TEASER++ coarse alignment with voxelised features and robust correspondence handling.</li>
-  <li>Refine the transform with GICP or VGICP.</li>
-  <li>Save or load the alignment relative to a spatial anchor, room mesh, or effect mesh.</li>
-  <li>Inspect the result in mixed reality with interactive visual comparison modes.</li>
+  <li>Extract and filter source points from the reconstructed representation.</li>
+  <li>Acquire target points from Quest-side depth sensing and scene data.</li>
+  <li>Estimate a robust global transform from feature correspondences.</li>
+  <li>Refine the alignment with G-ICP or V-GICP.</li>
+  <li>Persist the transform relative to the MR world coordinate system.</li>
+  <li>Compare the aligned reconstruction with live VST using the 3D Slider.</li>
 </ol>
 
-## Mixed Reality Comparison
+## Evaluation
 
-After registration, MR Compare applies the recovered transform to the reconstructed source scene and exposes visual comparison controls inside the headset. The comparison system can target either a Gaussian Splatting renderer or a standard mesh renderer, enabling workflows such as opacity adjustment, switch-back visibility, and passthrough-based inspection.
+The paper evaluates MR-Compare through a real-world comparative benchmark and an exploratory user study with 30 participants. The study covers five practical reconstruction workflows: RealityScan mesh, Polycam mesh, desktop 3DGS, desktop 3DGS-MCMC, and Scaniverse 3DGS. Across these workflows, MR-Compare achieved centimetre-level registration, with desktop 3DGS workflows showing the strongest overall visual consistency in the tested settings.
 
-<div class="mr-status-note">
-  This page currently uses the system workflow figure as its teaser. Replace it with a headset demo video, side-by-side comparison, or captured result once the final media is ready.
-</div>
+The draft also studies a training-free anisotropy filter for improving 3DGS-to-scan registration on Replica scenes. Moderate pruning reduces residual alignment error by selecting more surface-proximal Gaussian centres for registration.
 
 ## Project Status
 
-MR Compare is a research/prototype Unity project targeting Meta Quest 3 and compatible Meta XR devices. It is intended to be opened, inspected, modified, and adapted for scene-specific registration workflows. User-specific reconstructed scenes are not included in the repository.
+MR-Compare is a paper project conditionally accepted at IEEE ISMAR 2026. The final publication route is still pending, so the public paper link and final citation will be updated after the camera-ready version is available.
 
 ## Citation
 
 <div class="mr-citation">@misc{zhu2026mrcompare,
-  title  = {MR Compare: Mixed Reality Registration and Visual Comparison for Reconstructed 3D Scenes},
-  author = {Zhu, Changrui},
+  title  = {MR-Compare: A Mixed-Reality Framework for Spatially Grounded Visual Comparison of Heterogeneous 3D Reconstructions with Reality},
+  author = {Zhu, Changrui and others},
   year   = {2026},
-  note   = {Unity research prototype}
+  note   = {Conditionally accepted at IEEE ISMAR 2026}
 }</div>
 
