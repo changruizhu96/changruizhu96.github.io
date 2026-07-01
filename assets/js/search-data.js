@@ -77,6 +77,11 @@ ninja.data = [{
           description: "another project with an image 🎉",
           section: "Projects",handler: () => {
               window.location.href = "/projects/9_project/";
+            },},{id: "projects-mr-compare",
+          title: 'MR Compare',
+          description: "Mixed reality registration and visual comparison for reconstructed 3D scenes.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/mr-compare/";
             },},{
         id: 'social-email',
         title: 'email',
