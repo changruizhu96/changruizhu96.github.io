@@ -134,15 +134,6 @@ _styles: >
     max-width: 900px;
     text-align: center;
   }
-  .paper-two-col {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-    margin-top: 1rem;
-  }
-  .paper-two-col .paper-figure-caption {
-    text-align: left;
-  }
   .paper-pipeline {
     display: grid;
     gap: 0.9rem;
@@ -256,7 +247,7 @@ _styles: >
       Your browser does not support the video tag.
     </video>
     <div class="paper-figure-caption">
-      Final outcome demo: a registered 3D reconstruction aligned with the physical office and visualized through switching and the 3D Slider.
+      Final outcome demo: five registered reconstruction outputs aligned with the physical office, including standard 3DGS, RealityScan dense mesh, Scaniverse 3DGS splat, Polycam mesh, and 3DGS-MCMC. The demo shows switching between reconstructions and visualization with the 3D Slider.
     </div>
   </section>
 
@@ -347,23 +338,17 @@ _styles: >
     <div class="paper-figure-caption">
       Replica tau-sweep heatmaps for translation and rotation errors. Moderate anisotropy pruning improves robustness and accuracy, especially for standard 3DGS.
     </div>
-    <div class="paper-two-col">
-      <div>
-        <div class="paper-figure">
-          {% include figure.liquid loading="lazy" path="assets/img/mr-compare/registration-ratings.jpg" title="Registration ratings" class="img-fluid rounded z-depth-1" %}
-        </div>
-        <div class="paper-figure-caption">
-          Predicted response distributions for subjective registration ratings across rooms and reconstruction workflows.
-        </div>
-      </div>
-      <div>
-        <div class="paper-figure">
-          {% include figure.liquid loading="lazy" path="assets/img/mr-compare/visual-consistency.jpg" title="Visual consistency ratings" class="img-fluid rounded z-depth-1" %}
-        </div>
-        <div class="paper-figure-caption">
-          Predicted response distributions for visual consistency dimensions, including clarity, depth, completeness, geometry, and recognizability.
-        </div>
-      </div>
+    <div class="paper-figure">
+      {% include figure.liquid loading="lazy" path="assets/img/mr-compare/registration-ratings.jpg" title="Registration ratings" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="paper-figure-caption">
+      Predicted response distributions for subjective registration ratings across rooms and reconstruction workflows.
+    </div>
+    <div class="paper-figure">
+      {% include figure.liquid loading="lazy" path="assets/img/mr-compare/visual-consistency.jpg" title="Visual consistency ratings" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="paper-figure-caption">
+      Predicted response distributions for visual consistency dimensions, including clarity, depth, completeness, geometry, and recognizability.
     </div>
   </section>
 
