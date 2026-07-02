@@ -17,6 +17,9 @@ on:
       - "**.yml"
       - "Gemfile"
       - "Gemfile.lock"
+      - "package.json"
+      - "package-lock.json"
+      - "requirements-deploy.txt"
       - "!.github/workflows/axe.yml"
       - "!.github/workflows/broken-links.yml"
       - "!.github/workflows/deploy-docker-tag.yml"
@@ -46,6 +49,9 @@ on:
       - "**.yml"
       - "Gemfile"
       - "Gemfile.lock"
+      - "package.json"
+      - "package-lock.json"
+      - "requirements-deploy.txt"
       - "!.github/workflows/axe.yml"
       - "!.github/workflows/broken-links.yml"
       - "!.github/workflows/deploy-docker-tag.yml"
@@ -64,41 +70,100 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   deploy:
-    # available images: https://github.com/actions/runner-images#available-images
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout 🛎️
+      - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Ruby 💎
+
+      - name: Detect optional build inputs
+        id: optional
+        shell: bash
+        run: |
+          if grep -RIl --exclude-dir=.git --exclude-dir=_site --exclude-dir=node_modules --exclude-dir=vendor --exclude='README.md' --exclude='CUSTOMIZE.md' --exclude='FAQ.md' --exclude='INSTALL.md' --include='*.md' --include='*.html' --include='*.liquid' -E '\{%\s*jupyter_notebook|\.ipynb' . >/dev/null; then
+            echo "notebooks=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "notebooks=false" >> "$GITHUB_OUTPUT"
+          fi
+
+          if awk '
+            /^imagemagick:/ { flag=1; next }
+            flag && /^[^[:space:]]/ { flag=0 }
+            flag && /enabled:[[:space:]]*true/ { found=1 }
+            END { exit !found }
+          ' _config.yml; then
+            echo "imagemagick=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "imagemagick=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3.5"
           bundler-cache: true
-      - name: Setup Python 🐍
+
+      - name: Cache Jekyll metadata
+        uses: actions/cache@v4
+        with:
+          path: |
+            .jekyll-cache
+            .sass-cache
+          key: ${{ runner.os }}-jekyll-${{ hashFiles('Gemfile.lock', '_config.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-jekyll-
+
+      - name: Setup Python
+        if: steps.optional.outputs.notebooks == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: "3.13"
-          cache: "pip" # caching pip dependencies
-      - name: Update _config.yml ⚙️
+          cache: "pip"
+          cache-dependency-path: requirements-deploy.txt
+
+      - name: Install notebook converter
+        if: steps.optional.outputs.notebooks == 'true'
+        run: python -m pip install --disable-pip-version-check --prefer-binary -r requirements-deploy.txt
+
+      - name: Install ImageMagick
+        if: steps.optional.outputs.imagemagick == 'true'
+        run: |
+          if ! command -v magick >/dev/null 2>&1 && ! command -v convert >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends imagemagick
+          fi
+
+      - name: Update _config.yml
         uses: fjogeleit/yaml-update-action@main
         with:
           commitChange: false
           valueFile: "_config.yml"
           propertyPath: "giscus.repo"
           value: ${{ github.repository }}
-      - name: Install and Build 🔧
+
+      - name: Build site
         run: |
-          sudo apt-get update && sudo apt-get install -y imagemagick
-          pip3 install --upgrade nbconvert
           export JEKYLL_ENV=production
           bundle exec jekyll build
-      - name: Purge unused CSS 🧹
-        run: |
-          npm install -g purgecss
-          purgecss -c purgecss.config.js
-      - name: Deploy 🚀
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install CSS tooling
+        run: npm ci --ignore-scripts --prefer-offline --no-audit --no-fund
+
+      - name: Purge unused CSS
+        run: npx purgecss -c purgecss.config.js
+
+      - name: Deploy
         if: github.event_name != 'pull_request'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
