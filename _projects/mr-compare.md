@@ -137,44 +137,29 @@ _styles: >
   }
   .paper-pipeline {
     display: grid;
-    gap: 0.8rem;
-    margin-top: 1.25rem;
+    gap: 0.9rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    margin-top: 1rem;
   }
   .paper-pipeline-step {
-    border-top: 1px solid var(--global-divider-color);
-    padding-top: 0.8rem;
+    border: 1px solid var(--global-divider-color);
+    border-radius: 0.5rem;
+    padding: 0.95rem;
   }
   .paper-pipeline-step strong {
-    color: var(--global-theme-color);
+    color: var(--global-text-color);
     display: block;
     font-size: 0.98rem;
     margin-bottom: 0.25rem;
+  }
+  .paper-step-label {
+    color: var(--global-theme-color);
+    margin-right: 0.35rem;
   }
   .paper-pipeline-step p {
     color: var(--global-text-color-light);
     font-size: 0.96rem;
     line-height: 1.62;
-    margin-bottom: 0;
-  }
-  .paper-highlight-grid {
-    display: grid;
-    gap: 0.9rem;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    margin-top: 1rem;
-  }
-  .paper-highlight {
-    border: 1px solid var(--global-divider-color);
-    border-radius: 0.5rem;
-    padding: 0.95rem;
-  }
-  .paper-highlight h3 {
-    font-size: 1rem;
-    margin-bottom: 0.35rem;
-  }
-  .paper-highlight p {
-    color: var(--global-text-color-light);
-    font-size: 0.94rem;
-    line-height: 1.55;
     margin-bottom: 0;
   }
   .paper-results {
@@ -278,43 +263,28 @@ _styles: >
 
   <section class="paper-section">
     <h2>Method</h2>
-    <div class="paper-highlight-grid">
-      <div class="paper-highlight">
-        <h3>Heterogeneous Inputs</h3>
-        <p>Mesh and 3DGS assets are converted into point-cloud representations suitable for registration.</p>
-      </div>
-      <div class="paper-highlight">
-        <h3>Quest Target</h3>
-        <p>Quest-side depth and scene data provide a target representation of the physical environment.</p>
-      </div>
-      <div class="paper-highlight">
-        <h3>Coarse-to-Fine Registration</h3>
-        <p>Feature-based global alignment is refined with G-ICP or V-GICP inside a self-contained Unity pipeline.</p>
-      </div>
-      <div class="paper-highlight">
-        <h3>3D Slider</h3>
-        <p>A geometry-driven MR mask lets users slide between reconstruction and live VST for spatial comparison.</p>
-      </div>
-    </div>
+    <p>
+      The teaser summarises MR-Compare as a single source-to-interaction pipeline. The system first converts heterogeneous reconstructions and headset observations into comparable point-cloud representations, then uses coarse-to-fine registration to place the reconstruction in the Quest world coordinate system before enabling in-headset visual comparison.
+    </p>
     <div class="paper-pipeline">
       <div class="paper-pipeline-step">
-        <strong>Fig. 1a. Source point collection</strong>
+        <strong><span class="paper-step-label">(a)</span>Source point collection</strong>
         <p>Each reconstruction is converted into a source point cloud: mesh vertices for mesh workflows and Gaussian centres for 3DGS workflows. A radius crop and optional voxel-hash density filter remove distant background content, skyboxes, and isolated floating points before registration.</p>
       </div>
       <div class="paper-pipeline-step">
-        <strong>Fig. 1b. Target point collection</strong>
+        <strong><span class="paper-step-label">(b)</span>Target point collection</strong>
         <p>The Quest-side target cloud is built from the Meta Quest 3 Depth API. A point cloud generator raycasts screen-space samples into world-space points, while chunked storage and density caps keep the scan practical for in-headset use.</p>
       </div>
       <div class="paper-pipeline-step">
-        <strong>Fig. 1c. Coarse registration</strong>
+        <strong><span class="paper-step-label">(c)</span>Coarse registration</strong>
         <p>After voxelisation reduces density mismatch, FPFH-based correspondences provide a global initialisation. MR-Compare supports robust coarse estimators such as TEASER++ and TurboReg, producing an initial alignment between reconstruction and headset scan.</p>
       </div>
       <div class="paper-pipeline-step">
-        <strong>Fig. 1d. Fine registration</strong>
+        <strong><span class="paper-step-label">(d)</span>Fine registration</strong>
         <p>The coarse transform is refined with G-ICP or V-GICP through the small_gicp backend. The resulting transform is persisted in the Quest world coordinate system so the aligned asset remains spatially grounded during comparison.</p>
       </div>
       <div class="paper-pipeline-step">
-        <strong>Fig. 1e. XR interactive comparison</strong>
+        <strong><span class="paper-step-label">(e)</span>XR interactive comparison</strong>
         <p>The final interface combines the registered reconstruction with live video see-through. A geometry-driven 3D Slider uses a movable volumetric alpha mask, letting users reveal reconstruction and physical-world content in the same spatial frame.</p>
       </div>
     </div>
