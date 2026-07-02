@@ -36,11 +36,12 @@ _styles: >
     max-width: 980px;
   }
   .paper-subtitle {
-    color: var(--global-text-color-light);
-    font-size: 1.05rem;
-    line-height: 1.6;
-    margin: 0 auto 1.1rem;
-    max-width: 800px;
+    color: var(--global-text-color);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.12;
+    margin: 0 auto 1.25rem;
+    max-width: 1040px;
   }
   .paper-authors {
     font-size: 1.05rem;
