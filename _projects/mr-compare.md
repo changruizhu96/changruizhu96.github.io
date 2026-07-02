@@ -192,11 +192,11 @@ _styles: >
 
 <div class="paper-page">
   <section class="paper-hero">
-    <div class="paper-venue">Conditionally accepted at IEEE ISMAR 2026</div>
     <h1 class="paper-title">MR-Compare</h1>
     <p class="paper-subtitle">
       A Mixed-Reality Framework for Spatially Grounded Visual Comparison of Heterogeneous 3D Reconstructions with Reality
     </p>
+    <div class="paper-venue">Conditionally accepted at IEEE ISMAR 2026</div>
     <div class="paper-authors">
       <a href="mailto:changrui.zhu.19@ucl.ac.uk">Changrui Zhu</a><sup>1</sup>,
       <a href="mailto:ernst.kruijff@h-brs.de">Ernst Kruijff</a><sup>2</sup>,
