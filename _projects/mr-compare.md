@@ -105,6 +105,13 @@ _styles: >
     max-width: 900px;
     text-align: center;
   }
+  .paper-video {
+    background: #000;
+    display: block;
+    margin: 1rem auto 0.35rem;
+    max-height: 72vh;
+    width: 100%;
+  }
   .paper-section {
     margin: 2.4rem 0;
   }
@@ -225,10 +232,10 @@ _styles: >
         <i class="fa-solid fa-book-open"></i>
         <span>Docs</span>
       </a>
-      <span class="paper-button disabled">
+      <a class="paper-button" href="#demo">
         <i class="fa-solid fa-film"></i>
-        <span>Video coming soon</span>
-      </span>
+        <span>Demo</span>
+      </a>
     </div>
   </section>
 
@@ -238,6 +245,20 @@ _styles: >
   <div class="paper-caption">
     MR-Compare registers mesh and 3D Gaussian Splatting reconstructions to the physical world, then supports in-headset visual comparison through a geometry-driven 3D Slider.
   </div>
+
+  <section class="paper-section" id="demo">
+    <h2>Demo</h2>
+    <p>
+      This demo shows MR-Compare running in an office scene, with a registered reconstruction compared against the live mixed-reality view.
+    </p>
+    <video class="paper-video rounded z-depth-1" controls playsinline preload="metadata">
+      <source src="{{ '/assets/video/mr-compare/office-demo.mp4' | relative_url }}" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="paper-figure-caption">
+      Office demo captured from the MR-Compare workflow.
+    </div>
+  </section>
 
   <section class="paper-section">
     <h2>Abstract</h2>
