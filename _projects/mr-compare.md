@@ -249,14 +249,14 @@ _styles: >
   <section class="paper-section" id="demo">
     <h2>Demo</h2>
     <p>
-      This demo shows MR-Compare running in an office scene, with a registered reconstruction compared against the live mixed-reality view.
+      This demo shows the final MR-Compare outcome in an office scene. Heterogeneous 3D reconstructions have already been registered to the physical space, allowing the user to switch between the aligned reconstruction and the live environment, and to inspect the result with the 3D Slider.
     </p>
     <video class="paper-video rounded z-depth-1" controls playsinline preload="metadata">
       <source src="{{ '/assets/video/mr-compare/office-demo.mp4' | relative_url }}" type="video/mp4">
       Your browser does not support the video tag.
     </video>
     <div class="paper-figure-caption">
-      Office demo captured from the MR-Compare workflow.
+      Final outcome demo: a registered 3D reconstruction aligned with the physical office and visualized through switching and the 3D Slider.
     </div>
   </section>
 
