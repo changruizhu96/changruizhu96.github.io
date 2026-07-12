@@ -1,0 +1,26 @@
+---
+import "../styles/global.css";
+interface Props { title?: string; description?: string; }
+const { title = "Changrui Zhu · Spatial Computing Researcher", description = "Research in mixed reality, human perception, 3D reconstruction, and human-in-the-loop intelligent systems." } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f1efe8" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>◌</text></svg>" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <slot />
+    <script is:inline>
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("is-visible")), { threshold: 0.12 });
+      if (!reducedMotion.matches) document.querySelectorAll("[data-reveal]").forEach((element) => observer.observe(element));
+      else document.querySelectorAll("[data-reveal]").forEach((element) => element.classList.add("is-visible"));
+    </script>
+  </body>
+</html>

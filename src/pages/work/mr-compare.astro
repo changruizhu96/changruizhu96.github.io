@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+---
+<BaseLayout title="MR-Compare · Changrui Zhu" description="A spatially grounded mixed-reality framework for comparing heterogeneous 3D reconstructions with reality.">
+  <SiteHeader current="work" />
+  <main id="main" class="project-page">
+    <header class="project-hero shell">
+      <div data-reveal><p class="eyebrow"><span>Selected system · 2026</span><span>IEEE ISMAR · conditional acceptance</span></p><h1>MR-Compare</h1><p class="project-deck">Comparing reconstructed worlds with the one you are standing in.</p></div>
+      <div class="project-meta" data-reveal><p>Mixed reality</p><p>Spatial registration</p><p>Human evaluation</p></div>
+    </header>
+    <figure class="project-figure project-figure-wide" data-reveal><img src="/media/mr-compare/teaser.jpg" alt="The MR-Compare end-to-end pipeline" width="1600" height="720" /><figcaption>From heterogeneous reconstructions to a shared, interactable mixed-reality coordinate frame.</figcaption></figure>
+    <section class="project-section shell section-rule project-intro" data-reveal><p class="kicker">The premise</p><h2>Digital twins are only useful when their differences from reality can be seen and understood.</h2><p>MR-Compare aligns mesh and 3D Gaussian Splatting reconstructions with the live physical environment on Meta Quest 3. A geometry-driven 3D Slider lets users reveal, compare, and interrogate both representations in the same spatial frame.</p></section>
+    <section class="project-section shell section-rule">
+      <div class="section-heading" data-reveal><p class="kicker">System logic</p><h2>Collect.<br />Register.<br />Compare.</h2></div>
+      <div class="process-grid">
+        <article data-reveal><span>01</span><h3>Collect</h3><p>Convert meshes, Gaussian centres, and headset depth observations into comparable point-cloud representations.</p></article>
+        <article data-reveal><span>02</span><h3>Register</h3><p>Combine robust coarse alignment with fine G-ICP refinement to place each reconstruction into the Quest world frame.</p></article>
+        <article data-reveal><span>03</span><h3>Compare</h3><p>Reveal reconstruction and live video see-through through a movable volumetric alpha mask.</p></article>
+      </div>
+    </section>
+    <figure class="project-figure shell" data-reveal><img src="/media/mr-compare/visual-comparison.jpg" alt="Registered reconstruction comparison examples in two physical rooms" width="1600" height="900" loading="lazy" /><figcaption>Five reconstruction workflows, spanning meshes and 3DGS, desktop and mobile capture.</figcaption></figure>
+    <section class="project-section shell section-rule findings">
+      <div class="section-heading" data-reveal><p class="kicker">Evaluation</p><h2>What the system revealed.</h2></div>
+      <div class="finding-grid"><article data-reveal><strong>30</strong><p>participants in an exploratory mixed-reality study</p></article><article data-reveal><strong>5</strong><p>representative reconstruction workflows</p></article><article data-reveal><strong>cm</strong><p>centimetre-level registration across tested settings</p></article><article data-reveal><strong>0-shot</strong><p>anisotropy filtering for robust 3DGS source selection</p></article></div>
+    </section>
+    <section class="project-outro shell section-rule" data-reveal><p class="kicker">Project status</p><h2>Conditionally accepted at IEEE ISMAR 2026.</h2><div class="link-row"><a class="text-link" href="https://github.com/changruizhu96/MR-Compare" target="_blank" rel="noreferrer">View code <span aria-hidden="true">↗</span></a><a class="text-link" href="mailto:changrui.zhu.19@ucl.ac.uk">Discuss the work <span aria-hidden="true">↗</span></a></div></section>
+  </main>
+  <footer class="site-footer shell"><p>Changrui Zhu</p><a href="/">Back to index ↑</a><p>© {new Date().getFullYear()}</p></footer>
+</BaseLayout>

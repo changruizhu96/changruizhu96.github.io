@@ -1,170 +1,35 @@
-name: Deploy site
+name: Deploy Astro site to GitHub Pages
 
 on:
   push:
-    branches:
-      - master
-      - main
-    paths:
-      - "assets/**"
-      - "_sass/**"
-      - "_scripts/**"
-      - "**.bib"
-      - "**.html"
-      - "**.js"
-      - "**.liquid"
-      - "**/*.md"
-      - "**.yml"
-      - "Gemfile"
-      - "Gemfile.lock"
-      - "package.json"
-      - "package-lock.json"
-      - "requirements-deploy.txt"
-      - "!.github/workflows/axe.yml"
-      - "!.github/workflows/broken-links.yml"
-      - "!.github/workflows/deploy-docker-tag.yml"
-      - "!.github/workflows/deploy-image.yml"
-      - "!.github/workflows/docker-slim.yml"
-      - "!.github/workflows/lighthouse-badger.yml"
-      - "!.github/workflows/prettier.yml"
-      - "!lighthouse_results/**"
-      - "!CONTRIBUTING.md"
-      - "!CUSTOMIZE.md"
-      - "!FAQ.md"
-      - "!INSTALL.md"
-      - "!README.md"
-  pull_request:
-    branches:
-      - master
-      - main
-    paths:
-      - "assets/**"
-      - "_sass/**"
-      - "_scripts/**"
-      - "**.bib"
-      - "**.html"
-      - "**.js"
-      - "**.liquid"
-      - "**/*.md"
-      - "**.yml"
-      - "Gemfile"
-      - "Gemfile.lock"
-      - "package.json"
-      - "package-lock.json"
-      - "requirements-deploy.txt"
-      - "!.github/workflows/axe.yml"
-      - "!.github/workflows/broken-links.yml"
-      - "!.github/workflows/deploy-docker-tag.yml"
-      - "!.github/workflows/deploy-image.yml"
-      - "!.github/workflows/docker-slim.yml"
-      - "!.github/workflows/lighthouse-badger.yml"
-      - "!.github/workflows/prettier.yml"
-      - "!lighthouse_results/**"
-      - "!CONTRIBUTING.md"
-      - "!CUSTOMIZE.md"
-      - "!FAQ.md"
-      - "!INSTALL.md"
-      - "!README.md"
+    branches: [main]
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 concurrency:
-  group: pages-${{ github.ref }}
+  group: pages
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
+      - name: Build and upload Astro site
+        uses: withastro/action@v6
 
-      - name: Detect optional build inputs
-        id: optional
-        shell: bash
-        run: |
-          if grep -RIl --exclude-dir=.git --exclude-dir=_site --exclude-dir=node_modules --exclude-dir=vendor --exclude='README.md' --exclude='CUSTOMIZE.md' --exclude='FAQ.md' --exclude='INSTALL.md' --include='*.md' --include='*.html' --include='*.liquid' -E '\{%\s*jupyter_notebook|\.ipynb' . >/dev/null; then
-            echo "notebooks=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "notebooks=false" >> "$GITHUB_OUTPUT"
-          fi
-
-          if awk '
-            /^imagemagick:/ { flag=1; next }
-            flag && /^[^[:space:]]/ { flag=0 }
-            flag && /enabled:[[:space:]]*true/ { found=1 }
-            END { exit !found }
-          ' _config.yml; then
-            echo "imagemagick=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "imagemagick=false" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: "3.3.5"
-          bundler-cache: true
-
-      - name: Cache Jekyll metadata
-        uses: actions/cache@v4
-        with:
-          path: |
-            .jekyll-cache
-            .sass-cache
-          key: ${{ runner.os }}-jekyll-${{ hashFiles('Gemfile.lock', '_config.yml') }}
-          restore-keys: |
-            ${{ runner.os }}-jekyll-
-
-      - name: Setup Python
-        if: steps.optional.outputs.notebooks == 'true'
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.13"
-          cache: "pip"
-          cache-dependency-path: requirements-deploy.txt
-
-      - name: Install notebook converter
-        if: steps.optional.outputs.notebooks == 'true'
-        run: python -m pip install --disable-pip-version-check --prefer-binary -r requirements-deploy.txt
-
-      - name: Install ImageMagick
-        if: steps.optional.outputs.imagemagick == 'true'
-        run: |
-          if ! command -v magick >/dev/null 2>&1 && ! command -v convert >/dev/null 2>&1; then
-            sudo apt-get update
-            sudo apt-get install -y --no-install-recommends imagemagick
-          fi
-
-      - name: Update _config.yml
-        uses: fjogeleit/yaml-update-action@main
-        with:
-          commitChange: false
-          valueFile: "_config.yml"
-          propertyPath: "giscus.repo"
-          value: ${{ github.repository }}
-
-      - name: Build site
-        run: |
-          export JEKYLL_ENV=production
-          bundle exec jekyll build
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-          cache: "npm"
-
-      - name: Install CSS tooling
-        run: npm ci --ignore-scripts --prefer-offline --no-audit --no-fund
-
-      - name: Purge unused CSS
-        run: npx purgecss -c purgecss.config.js
-
-      - name: Deploy
-        if: github.event_name != 'pull_request'
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: _site
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

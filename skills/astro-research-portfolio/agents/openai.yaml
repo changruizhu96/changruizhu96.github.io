@@ -1,0 +1,4 @@
+interface:
+  display_name: "Astro Research Portfolio"
+  short_description: "Build and maintain Changrui Zhu's spatial research portfolio"
+  default_prompt: "Use $astro-research-portfolio to develop or update this Astro research portfolio."

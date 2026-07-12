@@ -1,0 +1,10 @@
+---
+const { current = "home" } = Astro.props;
+---
+<header class="site-header">
+  <a class="wordmark" href="/" aria-label="Changrui Zhu home"><span class="wordmark-mark" aria-hidden="true"></span><span>CZ / Spatial notes</span></a>
+  <nav aria-label="Primary navigation">
+    <a href="/#work">Work</a><a href="/#publications">Publications</a><a href="/#about">About</a>
+    {current === "work" && <a class="nav-back" href="/">← Index</a>}
+  </nav>
+</header>
