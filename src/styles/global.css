@@ -53,6 +53,8 @@ img { display: block; max-width: 100%; }
 .change-mask.is-active { opacity: 1; }
 .change-intro { position: absolute; z-index: 3; left: 1rem; bottom: 4.6rem; width: min(280px, calc(100% - 2rem)); padding: 1rem; border: 1px solid var(--ink); background: color-mix(in srgb, var(--paper) 92%, transparent); backdrop-filter: blur(8px); }
 .change-intro p { margin: 0 0 1rem; font-size: 1rem; line-height: 1.4; }
+.change-intro .change-keywords { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem .42rem; margin-bottom: .8rem; padding-bottom: .7rem; border-bottom: 1px solid var(--line); color: var(--muted); font: .66rem/1.45 var(--mono); letter-spacing: .035em; text-transform: uppercase; }
+.change-keywords .keyword-arrow { color: var(--signal); }
 .change-intro button, .change-actions button { appearance: none; padding: 0 0 .2rem; border: 0; border-bottom: 1px solid currentColor; border-radius: 0; background: transparent; color: inherit; font: .72rem/1.4 var(--mono); letter-spacing: .035em; text-transform: uppercase; cursor: pointer; }
 .change-intro button { display: flex; width: 100%; justify-content: space-between; }
 .change-intro button:hover, .change-actions button:hover { opacity: .55; }

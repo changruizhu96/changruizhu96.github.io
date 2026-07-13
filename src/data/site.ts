@@ -2,7 +2,7 @@ export const site = {
   name: "Changrui Zhu",
   role: "PhD researcher · Spatial computing · UCL",
   email: "changrui.zhu.19@ucl.ac.uk",
-  statement: "Every space carries a memory of what it was.",
+  statement: "Every space exists between the memory of what it was and the possibility of what it might become.",
   introduction: "I build human-centred spatial intelligence systems for understanding and interacting across physical, reconstructed, and virtual environments. Bringing together 3D vision, extended reality, and cognitive science, my work explores how spatial representations can remain grounded in reality while becoming meaningful and useful to people.",
   links: [
     { label: "Google Scholar", href: "https://scholar.google.com/citations?user=gjFTZ9EAAAAJ" },
