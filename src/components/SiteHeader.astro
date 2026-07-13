@@ -1,10 +1,11 @@
 ---
 const { current = "home" } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 <header class="site-header">
-  <a class="wordmark" href="/" aria-label="Changrui Zhu home"><span class="wordmark-mark" aria-hidden="true"></span><span>CZ / Spatial notes</span></a>
+  <a class="wordmark" href={`${base}/`} aria-label="Changrui Zhu home"><span class="wordmark-mark" aria-hidden="true"></span><span>Changrui Zhu</span></a>
   <nav aria-label="Primary navigation">
-    <a href="/#work">Work</a><a href="/#publications">Publications</a><a href="/#about">About</a>
-    {current === "work" && <a class="nav-back" href="/">← Index</a>}
+    <a href={`${base}/#work`}>Work</a><a href={`${base}/publications/`}>Publications</a><a href={`${base}/#about`}>About</a>
+    {current !== "home" && <a class="nav-back" href={`${base}/`}>← Index</a>}
   </nav>
 </header>

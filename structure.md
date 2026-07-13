@@ -2,17 +2,22 @@
 
 ## Current Astro flow
 
-- `src/pages/index.astro` renders the single-page research narrative: research premise, coordinates, featured work, publications, and biography.
-- `src/pages/work/mr-compare.astro` renders the first long-form project story.
-- `src/data/site.ts` is the structured source for identity, research coordinates, links, and selected publications.
-- `src/components/` contains the shared header and lightweight spatial Canvas enhancement.
+- `src/pages/index.astro` renders an identity-first research homepage: author and research focus, the interactive change-blindness premise, featured work, the three newest publication records from shared data, and a colour-portrait biography.
+- `src/pages/publications.astro` renders the complete publication collection as a spatial archive ordered by date.
+- `src/pages/work/mr-compare.astro` renders a source-faithful academic project page with paper metadata, abstract, local demo video, five-stage system workflow, visual comparison, evaluation summary, status, and provisional citation.
+- `src/data/site.ts` is the structured source for identity, links, and publication records.
+- `src/components/ChangeBlindnessTest.astro` owns the hero interaction, rotated isometric Canvas rendering, the user-adjustable blank-gap timer, hit testing, feedback, and reduced-motion controls.
+- `src/lib/changeBlindnessScene.mjs` deterministically generates a 20-object mixed-primitive scene pair from a seed; one projection-visible target is sampled across balanced depth bands and then moves by at least one footprint, appears, disappears, is replaced, or changes colour.
+- `src/components/` also contains the shared site header.
 - `src/layouts/BaseLayout.astro` owns document metadata and global progressive enhancement.
 - `src/styles/global.css` defines the complete visual system, responsive layouts, dark mode, and reduced-motion behavior.
-- `public/media/` contains only media copied into the Astro output.
+- `public/media/` contains only media copied into the Astro output, including the MR-Compare figures and office demo video used by the project page.
 - `.github/workflows/deploy.yml` builds static Astro output and deploys it to GitHub Pages.
 - `skills/astro-research-portfolio/` records the project-specific implementation and quality rules.
+- `tests/change-blindness.test.mjs` verifies deterministic generation, all five change modes, 20-object mixed-shape composition, continuous poses, footprint-relative displacement, colour isolation, projection visibility, and statistically balanced depth selection with Node's built-in test runner.
 
-## Legacy migration sources
+## Deployment path
 
-- `_pages/`, `_projects/`, `_bibliography/`, `_layouts/`, `_includes/`, `_sass/`, and most of `assets/` belong to the previous Jekyll site.
-- These sources remain temporarily for content verification and are not part of the Astro build.
+- `astro.config.mjs` targets `https://changruizhu96.github.io` and uses Astro's default `/` base for the username Pages repository.
+- Internal navigation and media URLs continue to derive from `import.meta.env.BASE_URL`, so the same components remain portable without hard-coded repository prefixes.
+- The former Jekyll deployment is preserved on `legacy-site-2026-07-13`; the independent `spatial-research-portfolio` repository remains available as a fallback preview.

@@ -1,0 +1,375 @@
+<section class="change-test" data-change-test aria-labelledby="change-test-title">
+  <canvas class="change-canvas" data-change-canvas role="img" aria-label="A procedurally generated isometric scene used for a change-blindness test">
+    A procedurally generated spatial change test.
+  </canvas>
+  <div class="change-test-meta" aria-hidden="true">
+    <span>Perception test</span>
+    <span data-test-id>Test —</span>
+  </div>
+  <span class="change-view" data-change-view aria-hidden="true">View A</span>
+  <label class="change-gap" for="change-gap-input">
+    <span>Blank gap</span>
+    <input id="change-gap-input" data-change-gap type="range" min="0" max="1000" step="50" value="500" />
+    <output data-change-gap-output for="change-gap-input">500 ms</output>
+  </label>
+  <div class="change-mask" data-change-mask aria-hidden="true"></div>
+  <div class="change-intro" data-change-intro>
+    <p id="change-test-title">A space generated for you.<br />One object will change.</p>
+    <button type="button" data-change-start>Begin observation <span aria-hidden="true">↗</span></button>
+  </div>
+  <div class="change-controls">
+    <p class="change-status" data-change-status aria-live="polite">A new spatial test is ready.</p>
+    <div class="change-actions">
+      <button type="button" data-change-swap hidden>Switch view</button>
+      <button type="button" data-change-reveal hidden>Reveal change</button>
+      <button type="button" data-change-new hidden>New test</button>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { createChangeTest } from "../lib/changeBlindnessScene.mjs";
+
+  const root = document.querySelector<HTMLElement>("[data-change-test]")!;
+  const canvas = root.querySelector<HTMLCanvasElement>("[data-change-canvas]")!;
+  const context = canvas.getContext("2d")!;
+
+  if (root && canvas && context) {
+    const mask = root.querySelector<HTMLElement>("[data-change-mask]");
+    const intro = root.querySelector<HTMLElement>("[data-change-intro]");
+    const status = root.querySelector<HTMLElement>("[data-change-status]");
+    const testId = root.querySelector<HTMLElement>("[data-test-id]");
+    const view = root.querySelector<HTMLElement>("[data-change-view]");
+    const gapInput = root.querySelector<HTMLInputElement>("[data-change-gap]");
+    const gapOutput = root.querySelector<HTMLOutputElement>("[data-change-gap-output]");
+    const startButton = root.querySelector<HTMLButtonElement>("[data-change-start]");
+    const swapButton = root.querySelector<HTMLButtonElement>("[data-change-swap]");
+    const revealButton = root.querySelector<HTMLButtonElement>("[data-change-reveal]");
+    const newButton = root.querySelector<HTMLButtonElement>("[data-change-new]");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const colorScheme = window.matchMedia("(prefers-color-scheme: dark)");
+    type HitRegion = { left: number; right: number; top: number; bottom: number };
+    const hitRegions = new Map<string, HitRegion>();
+    const viewDuration = 900;
+    let blankDuration = 500;
+
+    let width = 0;
+    let height = 0;
+    let test = createChangeTest(initialSeed());
+    let phase: "ready" | "running" | "complete" = "ready";
+    let showingAfter = false;
+    let startedAt = 0;
+    let attempts = 0;
+    let switchTimer: number | undefined;
+    let maskTimer: number | undefined;
+    let targetRegion: HitRegion | undefined;
+
+    function randomSeed() {
+      const values = new Uint32Array(1);
+      window.crypto.getRandomValues(values);
+      return values[0];
+    }
+
+    function initialSeed() {
+      const rawSeed = new URLSearchParams(window.location.search).get("seed");
+      const parsedSeed = rawSeed === null ? Number.NaN : Number(rawSeed);
+      return Number.isInteger(parsedSeed) && parsedSeed >= 0 && parsedSeed <= 0xffffffff ? parsedSeed : randomSeed();
+    }
+
+    function polygon(points: Array<{ x: number; y: number }>, fill: string, stroke: string) {
+      context.beginPath();
+      points.forEach((point, index) => index === 0 ? context.moveTo(point.x, point.y) : context.lineTo(point.x, point.y));
+      context.closePath();
+      context.fillStyle = fill;
+      context.fill();
+      context.strokeStyle = stroke;
+      context.lineWidth = 0.8;
+      context.stroke();
+    }
+
+    function renderScene() {
+      const dark = colorScheme.matches;
+      const ink = dark ? "#eeede6" : "#171916";
+      const paper = dark ? "#161815" : "#f7f6f2";
+      const grid = dark ? "rgba(238,237,230,.13)" : "rgba(23,25,22,.12)";
+      const floor = dark ? "rgba(238,237,230,.025)" : "rgba(255,255,255,.34)";
+      const shadow = dark ? "rgba(0,0,0,.28)" : "rgba(23,25,22,.12)";
+      const palettes = dark
+        ? [
+            { top: "#858e89", left: "#565f5a", right: "#69736e", solid: "#7d8782" },
+            { top: "#958b80", left: "#625a52", right: "#786f66", solid: "#8c8278" },
+            { top: "#818995", left: "#515862", right: "#666e7a", solid: "#78818d" },
+            { top: "#89907c", left: "#59604f", right: "#6c745f", solid: "#808873" },
+          ]
+        : [
+            { top: "#e1e8e4", left: "#aeb9b3", right: "#c4cec9", solid: "#d1dad5" },
+            { top: "#e9e0d5", left: "#b9aa9a", right: "#d0c2b2", solid: "#ddd1c3" },
+            { top: "#dde2ea", left: "#aab2bf", right: "#c2c9d4", solid: "#d0d6df" },
+            { top: "#e2e6d7", left: "#afb7a0", right: "#c7cdb9", solid: "#d5dac9" },
+          ];
+
+      context.clearRect(0, 0, width, height);
+      hitRegions.clear();
+
+      const sceneWidth = width * 0.72;
+      const sceneDepth = Math.min(width * 0.48, height * 0.42);
+      const originY = height * 0.19;
+      const lift = height * 0.44;
+      const project = (x: number, z: number, y = 0) => ({
+        x: width / 2 + (x - z) * sceneWidth / 2,
+        y: originY + (x + z) * sceneDepth / 2 - y * lift,
+      });
+
+      const floorPoints = [project(0, 0), project(1, 0), project(1, 1), project(0, 1)];
+      polygon(floorPoints, floor, grid);
+      context.strokeStyle = grid;
+      context.lineWidth = 0.7;
+      for (let index = 1; index < 5; index += 1) {
+        const position = index / 5;
+        const xStart = project(position, 0);
+        const xEnd = project(position, 1);
+        const zStart = project(0, position);
+        const zEnd = project(1, position);
+        context.beginPath(); context.moveTo(xStart.x, xStart.y); context.lineTo(xEnd.x, xEnd.y); context.stroke();
+        context.beginPath(); context.moveTo(zStart.x, zStart.y); context.lineTo(zEnd.x, zEnd.y); context.stroke();
+      }
+
+      const objects = (showingAfter ? test.after : test.before).slice().sort((a, b) => (a.x + a.z) - (b.x + b.z));
+      objects.forEach((object) => {
+        const palette = palettes[object.color];
+        const center = project(object.x, object.z);
+        const topCenter = project(object.x, object.z, object.height);
+        const shadowRadius = Math.max(7, (object.width + object.depth) * sceneWidth * 0.24);
+        context.beginPath();
+        context.ellipse(center.x, center.y + 2, shadowRadius, shadowRadius * 0.3, 0, 0, Math.PI * 2);
+        context.fillStyle = shadow;
+        context.fill();
+
+        let bounds: Array<{ x: number; y: number }> = [];
+        if (object.shape === "cube" || object.shape === "cuboid") {
+          const halfWidth = object.width / 2;
+          const halfDepth = object.depth / 2;
+          const cosine = Math.cos(object.rotation);
+          const sine = Math.sin(object.rotation);
+          const localCorners = [
+            { x: -halfWidth, z: -halfDepth },
+            { x: halfWidth, z: -halfDepth },
+            { x: halfWidth, z: halfDepth },
+            { x: -halfWidth, z: halfDepth },
+          ];
+          const worldCorners = localCorners.map((corner) => ({
+            x: object.x + corner.x * cosine - corner.z * sine,
+            z: object.z + corner.x * sine + corner.z * cosine,
+          }));
+          const base = worldCorners.map((corner) => project(corner.x, corner.z));
+          const top = worldCorners.map((corner) => project(corner.x, corner.z, object.height));
+          const visibleFaces = worldCorners.map((corner, index) => {
+            const nextIndex = (index + 1) % worldCorners.length;
+            const next = worldCorners[nextIndex];
+            const tangent = { x: next.x - corner.x, z: next.z - corner.z };
+            const normal = { x: tangent.z, z: -tangent.x };
+            return {
+              index,
+              nextIndex,
+              normal,
+              depth: (base[index].y + base[nextIndex].y) / 2,
+            };
+          }).filter((face) => face.normal.x + face.normal.z > 0.0001).sort((a, b) => a.depth - b.depth);
+          visibleFaces.forEach((face) => {
+            const fill = Math.abs(face.normal.x) > Math.abs(face.normal.z) ? palette.right : palette.left;
+            polygon([base[face.index], base[face.nextIndex], top[face.nextIndex], top[face.index]], fill, ink);
+          });
+          polygon(top, palette.top, ink);
+          bounds = [...base, ...top];
+        } else if (object.shape === "cylinder") {
+          const radius = Math.max(7, (object.width + object.depth) * sceneWidth * 0.25);
+          const ellipseHeight = radius * 0.34;
+          context.beginPath();
+          context.moveTo(topCenter.x - radius, topCenter.y);
+          context.lineTo(center.x - radius, center.y);
+          context.ellipse(center.x, center.y, radius, ellipseHeight, 0, Math.PI, 0, true);
+          context.lineTo(topCenter.x + radius, topCenter.y);
+          context.ellipse(topCenter.x, topCenter.y, radius, ellipseHeight, 0, 0, Math.PI, true);
+          context.closePath();
+          context.fillStyle = palette.right;
+          context.fill();
+          context.strokeStyle = ink;
+          context.stroke();
+          context.beginPath();
+          context.ellipse(topCenter.x, topCenter.y, radius, ellipseHeight, 0, 0, Math.PI * 2);
+          context.fillStyle = palette.top;
+          context.fill();
+          context.stroke();
+          bounds = [
+            { x: center.x - radius, y: center.y + ellipseHeight },
+            { x: center.x + radius, y: center.y + ellipseHeight },
+            { x: topCenter.x - radius, y: topCenter.y - ellipseHeight },
+            { x: topCenter.x + radius, y: topCenter.y - ellipseHeight },
+          ];
+        } else {
+          const radius = Math.max(8, object.width * sceneWidth * 0.52);
+          const sphereCenter = project(object.x, object.z, object.height * 0.48);
+          const gradient = context.createRadialGradient(sphereCenter.x - radius * 0.32, sphereCenter.y - radius * 0.35, radius * 0.08, sphereCenter.x, sphereCenter.y, radius);
+          gradient.addColorStop(0, palette.top);
+          gradient.addColorStop(1, palette.left);
+          context.beginPath();
+          context.arc(sphereCenter.x, sphereCenter.y, radius, 0, Math.PI * 2);
+          context.fillStyle = gradient;
+          context.fill();
+          context.strokeStyle = ink;
+          context.stroke();
+          bounds = [
+            { x: sphereCenter.x - radius, y: sphereCenter.y - radius },
+            { x: sphereCenter.x + radius, y: sphereCenter.y + radius },
+          ];
+        }
+
+        const xs = bounds.map((point) => point.x);
+        const ys = bounds.map((point) => point.y);
+        hitRegions.set(object.id, {
+          left: Math.min(...xs) - 6,
+          right: Math.max(...xs) + 6,
+          top: Math.min(...ys) - 6,
+          bottom: Math.max(...ys) + 6,
+        });
+      });
+
+      const visibleTargetRegion = hitRegions.get(test.targetId);
+      if (visibleTargetRegion) targetRegion = { ...visibleTargetRegion };
+
+      if (phase === "complete") {
+        if (targetRegion) {
+          context.save();
+          context.strokeStyle = "#a8ff2f";
+          context.lineWidth = 2;
+          context.setLineDash([5, 5]);
+          context.strokeRect(targetRegion.left - 6, targetRegion.top - 6, targetRegion.right - targetRegion.left + 12, targetRegion.bottom - targetRegion.top + 12);
+          context.restore();
+        }
+      }
+
+      if (view) view.textContent = showingAfter ? "View B" : "View A";
+      canvas.style.cursor = phase === "running" ? "crosshair" : "default";
+      canvas.style.backgroundColor = paper;
+    }
+
+    function resize() {
+      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      width = canvas.clientWidth;
+      height = canvas.clientHeight;
+      canvas.width = Math.round(width * ratio);
+      canvas.height = Math.round(height * ratio);
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      renderScene();
+    }
+
+    function stopSwitching() {
+      if (switchTimer) window.clearTimeout(switchTimer);
+      if (maskTimer) window.clearTimeout(maskTimer);
+      switchTimer = undefined;
+      maskTimer = undefined;
+      mask?.classList.remove("is-active");
+    }
+
+    function scheduleSwitch() {
+      if (phase !== "running") return;
+      switchTimer = window.setTimeout(() => {
+        if (blankDuration === 0) {
+          showingAfter = !showingAfter;
+          renderScene();
+          scheduleSwitch();
+          return;
+        }
+        mask?.classList.add("is-active");
+        maskTimer = window.setTimeout(() => {
+          showingAfter = !showingAfter;
+          renderScene();
+          mask?.classList.remove("is-active");
+          scheduleSwitch();
+        }, blankDuration);
+      }, viewDuration);
+    }
+
+    function begin() {
+      phase = "running";
+      showingAfter = false;
+      attempts = 0;
+      startedAt = performance.now();
+      root.classList.add("is-running");
+      intro?.setAttribute("hidden", "");
+      revealButton?.removeAttribute("hidden");
+      newButton?.setAttribute("hidden", "");
+      if (status) status.textContent = "Select the object that changed.";
+      if (reducedMotion.matches) swapButton?.removeAttribute("hidden");
+      else scheduleSwitch();
+      renderScene();
+    }
+
+    function finish(message: string) {
+      stopSwitching();
+      phase = "complete";
+      showingAfter = true;
+      root.classList.remove("is-running");
+      swapButton?.setAttribute("hidden", "");
+      revealButton?.setAttribute("hidden", "");
+      newButton?.removeAttribute("hidden");
+      if (status) status.textContent = message;
+      renderScene();
+    }
+
+    function reset() {
+      stopSwitching();
+      test = createChangeTest(randomSeed());
+      phase = "ready";
+      showingAfter = false;
+      attempts = 0;
+      targetRegion = undefined;
+      root.classList.remove("is-running");
+      intro?.removeAttribute("hidden");
+      swapButton?.setAttribute("hidden", "");
+      revealButton?.setAttribute("hidden", "");
+      newButton?.setAttribute("hidden", "");
+      if (status) status.textContent = "A new spatial test is ready.";
+      updateTestId();
+      renderScene();
+    }
+
+    function updateTestId() {
+      if (testId) testId.textContent = `Test ${test.seed.toString(16).toUpperCase().slice(-4).padStart(4, "0")}`;
+    }
+
+    canvas.addEventListener("pointerdown", (event) => {
+      if (phase !== "running" || mask?.classList.contains("is-active")) return;
+      const bounds = canvas.getBoundingClientRect();
+      const x = event.clientX - bounds.left;
+      const y = event.clientY - bounds.top;
+      const target = hitRegions.get(test.targetId) ?? targetRegion;
+      if (target && x >= target.left && x <= target.right && y >= target.top && y <= target.bottom) {
+        const elapsed = ((performance.now() - startedAt) / 1000).toFixed(1);
+        finish(`Change located · ${elapsed}s · ${attempts + 1} attempt${attempts === 0 ? "" : "s"}.`);
+      } else {
+        attempts += 1;
+        if (status) status.textContent = `Not there · ${attempts} attempt${attempts === 1 ? "" : "s"}. Keep observing.`;
+      }
+    });
+
+    startButton?.addEventListener("click", begin);
+    swapButton?.addEventListener("click", () => {
+      showingAfter = !showingAfter;
+      renderScene();
+    });
+    revealButton?.addEventListener("click", () => {
+      const descriptions: Record<string, string> = { move: "moved", disappear: "disappeared", appear: "appeared", replace: "was replaced", colour: "changed colour" };
+      finish(`Change revealed · one object ${descriptions[test.change.type]}.`);
+    });
+    gapInput?.addEventListener("input", () => {
+      blankDuration = Number(gapInput.value);
+      if (gapOutput) gapOutput.value = `${blankDuration} ms`;
+    });
+    newButton?.addEventListener("click", reset);
+    colorScheme.addEventListener("change", renderScene);
+    new ResizeObserver(resize).observe(canvas);
+    updateTestId();
+    resize();
+  }
+</script>

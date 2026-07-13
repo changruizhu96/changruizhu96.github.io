@@ -24,6 +24,7 @@ Maintain a distinctive research portfolio that communicates a spatial-computing 
 - Lead with the research premise, not a biography, headshot, or publication inventory.
 - Use the spatial language defined in `references/visual-system.md`.
 - Treat publications as evidence supporting the research narrative.
+- Keep full publication records on `/publications/`; use only a compact collection entry point on the home page.
 - Prefer real project imagery and diagrams over decorative stock imagery.
 - Use motion to communicate registration, comparison, focus, or spatial relationships. Avoid generic entrance effects as the primary identity.
 - Keep pages readable without JavaScript. Canvas and motion are progressive enhancements.
@@ -37,6 +38,7 @@ Maintain a distinctive research portfolio that communicates a spatial-computing 
 - Do not hard-code local filesystem paths.
 - Do not change publication claims, venues, dates, metrics, or author lists without checking a primary source or the repository's verified bibliography.
 - Keep the official Astro GitHub Pages action as the deployment path.
+- Derive internal navigation and media paths from `import.meta.env.BASE_URL`; the primary username Pages site is hosted at `/`.
 
 ## Validation
 

@@ -6,7 +6,7 @@ Use a "spatial research notebook" language: editorial typography over coordinate
 
 ## Tokens
 
-- Paper: `#f1efe8`
+- Paper: `#f7f6f2`
 - Ink: `#171916`
 - Signal: `#a8ff2f`
 - Body type: Manrope or a comparable restrained grotesk
@@ -19,6 +19,8 @@ Dark mode should invert paper and ink while preserving the signal color and read
 
 - Use asymmetric editorial grids and generous vertical space.
 - Pair large, direct claims with small measurement-style metadata.
+- Keep functional monospaced metadata at approximately `0.7–0.78rem`; reserve smaller type only for nonessential visual annotations.
+- Build hero copy in three readable levels: thesis, research question, and method summary. Do not use one oversized scale for a multi-sentence statement.
 - Use borders and alignment lines instead of generic cards and shadows.
 - Use large real project imagery with sparse spatial annotations.
 - Avoid pill-heavy interfaces, gradient hero blobs, glassmorphism, stock dashboard cards, and centered resume layouts.

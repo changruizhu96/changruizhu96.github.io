@@ -2,8 +2,8 @@ export const site = {
   name: "Changrui Zhu",
   role: "PhD researcher · Spatial computing · UCL",
   email: "changrui.zhu.19@ucl.ac.uk",
-  statement: "I study how people notice, compare, and act on changes across physical and reconstructed worlds.",
-  introduction: "I build perceptually grounded VR and mixed-reality systems, combining 3D reconstruction, spatial registration, interaction design, and controlled human studies.",
+  statement: "Every space carries a memory of what it was.",
+  introduction: "I investigate how people notice, interpret, and act on subtle changes between physical spaces and their reconstructed counterparts—where perception, memory, and spatial representation meet.",
   links: [
     { label: "Google Scholar", href: "https://scholar.google.com/citations?user=gjFTZ9EAAAAJ" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/changrui-zhu-b078031bb" },
@@ -11,14 +11,55 @@ export const site = {
   ],
 };
 
-export const researchCoordinates = [
-  { index: "01", title: "Human perception", text: "How semantic context, display type, and interaction design change what people notice and understand." },
-  { index: "02", title: "Spatial computing", text: "How reconstructed scenes and live environments can share a reliable coordinate frame in mixed reality." },
-  { index: "03", title: "Intelligent systems", text: "How computation and human judgement can work together when automatic perception remains uncertain." },
-];
-
 export const publications = [
-  { venue: "Displays · 2026", title: "Does display type matter for change detection? Comparing immersive and non-immersive displays under low and high semantic availability", authors: "Changrui Zhu, Ernst Kruijff, Harvey Stedman, Vijay M. Pawar, Simon Julier", href: "https://doi.org/10.1016/j.displa.2026.103379" },
-  { venue: "UIST · 2025", title: "Do You See What I See? Bring Live Pedestrians into an Outdoor Collaborative Mixed Reality Experience", authors: "Jingyi Zhang, Ziwen Lu, Changrui Zhu, Simon Julier, Anthony Steed", href: "https://doi.org/10.1145/3746059.3747667" },
-  { venue: "IEEE TVCG · 2025", title: "Evaluating 3D Visual Comparison Techniques for Change Detection in Virtual Reality", authors: "Changrui Zhu, Ernst Kruijff, Vijay M. Pawar, Simon Julier", href: "https://doi.org/10.1109/TVCG.2025.3549578" },
+  {
+    year: "2026",
+    venue: "Displays",
+    kind: "Journal article",
+    title: "Does display type matter for change detection? Comparing immersive and non-immersive displays under low and high semantic availability",
+    authors: "Changrui Zhu, Ernst Kruijff, Harvey Stedman, Vijay M. Pawar, Simon Julier",
+    summary: "A controlled investigation of how immersion and semantic availability shape visual change detection.",
+    topics: ["Change detection", "Display", "Perception"],
+    href: "https://doi.org/10.1016/j.displa.2026.103379",
+  },
+  {
+    year: "2025",
+    venue: "ACM UIST",
+    kind: "Conference paper",
+    title: "Do You See What I See? Bring Live Pedestrians into an Outdoor Collaborative Mixed Reality Experience",
+    authors: "Jingyi Zhang, Ziwen Lu, Changrui Zhu, Simon Julier, Anthony Steed",
+    summary: "A collaborative mixed-reality system that brings live pedestrians into a shared outdoor experience.",
+    topics: ["Mixed reality", "Collaboration", "Live capture"],
+    href: "https://doi.org/10.1145/3746059.3747667",
+  },
+  {
+    year: "2025",
+    venue: "IEEE TVCG",
+    kind: "Journal article",
+    title: "Evaluating 3D Visual Comparison Techniques for Change Detection in Virtual Reality",
+    authors: "Changrui Zhu, Ernst Kruijff, Vijay M. Pawar, Simon Julier",
+    summary: "An evaluation of spatial comparison techniques for identifying change in immersive 3D environments.",
+    topics: ["Virtual reality", "3D comparison", "Human study"],
+    href: "https://doi.org/10.1109/TVCG.2025.3549578",
+  },
+  {
+    year: "2025",
+    venue: "ISARC",
+    kind: "Conference paper",
+    title: "Enabling human-robot collaboration in unstructured construction environment through sharing control: Classification, Challenges, and Future Trends",
+    authors: "Guohao Wang, Changrui Zhu, Honghu Chu, Abdul-Majeed Mahamadu, Vijay M. Pawar",
+    summary: "A classification of shared-control approaches, challenges, and research directions for construction robotics.",
+    topics: ["Human-robot collaboration", "Shared control", "Construction"],
+    href: "https://doi.org/10.22260/ISARC2025/0117",
+  },
+  {
+    year: "2019",
+    venue: "IEEE DASC",
+    kind: "Conference paper",
+    title: "Emotion recognition from speech to improve human-robot interaction",
+    authors: "Changrui Zhu, Waseem Ahmad",
+    summary: "An early exploration of speech emotion recognition as a signal for more responsive human-robot interaction.",
+    topics: ["Emotion recognition", "Speech", "Human-robot interaction"],
+    href: "https://ieeexplore.ieee.org/document/8877543",
+  },
 ];

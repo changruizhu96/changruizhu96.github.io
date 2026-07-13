@@ -1,30 +1,115 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const bibtex = `@article{zhu2026mrcompare,
+  title   = {MR-Compare: A Mixed-Reality Framework for Spatially Grounded Visual Comparison of Heterogeneous 3D Reconstructions with Reality},
+  author  = {Zhu, Changrui and Kruijff, Ernst and Zhang, Pengju and Julier, Simon},
+  journal = {IEEE Transactions on Visualization and Computer Graphics},
+  year    = {2026},
+  note    = {Conditionally accepted for IEEE TVCG in conjunction with IEEE ISMAR 2026}
+}`;
 ---
-<BaseLayout title="MR-Compare · Changrui Zhu" description="A spatially grounded mixed-reality framework for comparing heterogeneous 3D reconstructions with reality.">
+<BaseLayout
+  title="MR-Compare · Changrui Zhu"
+  description="MR-Compare is a spatially grounded mixed reality framework for comparing heterogeneous 3D reconstructions with the live physical world."
+>
   <SiteHeader current="work" />
   <main id="main" class="project-page">
-    <header class="project-hero shell">
-      <div data-reveal><p class="eyebrow"><span>Selected system · 2026</span><span>IEEE ISMAR · conditional acceptance</span></p><h1>MR-Compare</h1><p class="project-deck">Comparing reconstructed worlds with the one you are standing in.</p></div>
-      <div class="project-meta" data-reveal><p>Mixed reality</p><p>Spatial registration</p><p>Human evaluation</p></div>
+    <header class="project-hero project-paper-hero shell">
+      <h1 data-reveal>MR-Compare</h1>
+      <p class="project-paper-title" data-reveal>A Mixed-Reality Framework for Spatially Grounded Visual Comparison of Heterogeneous 3D Reconstructions with Reality</p>
+      <p class="project-publication-status" data-reveal>IEEE ISMAR 2026 <span>(conditionally accepted as TVCG paper)</span></p>
+      <p class="project-authors" data-reveal>
+        <a href="mailto:changrui.zhu.19@ucl.ac.uk">Changrui Zhu</a><sup>1</sup>,
+        <a href="mailto:ernst.kruijff@h-brs.de">Ernst Kruijff</a><sup>2</sup>,
+        <a href="mailto:pengju.zhang.21@ucl.ac.uk">Pengju Zhang</a><sup>1</sup>,
+        <a href="mailto:s.julier@ucl.ac.uk">Simon Julier</a><sup>1</sup>
+      </p>
+      <p class="project-affiliations" data-reveal><sup>1</sup>University College London <span>·</span> <sup>2</sup>Hochschule Bonn-Rhein-Sieg</p>
+      <nav class="project-resource-links" aria-label="Project resources" data-reveal>
+        <span class="project-resource-link is-disabled">Paper coming soon</span>
+        <a class="project-resource-link" href="https://github.com/changruizhu96/MR-Compare" target="_blank" rel="noreferrer">Code ↗</a>
+        <a class="project-resource-link" href="https://github.com/changruizhu96/MR-Compare#readme" target="_blank" rel="noreferrer">Documentation ↗</a>
+        <a class="project-resource-link" href="#demo">Demo ↓</a>
+      </nav>
     </header>
-    <figure class="project-figure project-figure-wide" data-reveal><img src="/media/mr-compare/teaser.jpg" alt="The MR-Compare end-to-end pipeline" width="1600" height="720" /><figcaption>From heterogeneous reconstructions to a shared, interactable mixed-reality coordinate frame.</figcaption></figure>
-    <section class="project-section shell section-rule project-intro" data-reveal><p class="kicker">The premise</p><h2>Digital twins are only useful when their differences from reality can be seen and understood.</h2><p>MR-Compare aligns mesh and 3D Gaussian Splatting reconstructions with the live physical environment on Meta Quest 3. A geometry-driven 3D Slider lets users reveal, compare, and interrogate both representations in the same spatial frame.</p></section>
-    <section class="project-section shell section-rule">
-      <div class="section-heading" data-reveal><p class="kicker">System logic</p><h2>Collect.<br />Register.<br />Compare.</h2></div>
-      <div class="process-grid">
-        <article data-reveal><span>01</span><h3>Collect</h3><p>Convert meshes, Gaussian centres, and headset depth observations into comparable point-cloud representations.</p></article>
-        <article data-reveal><span>02</span><h3>Register</h3><p>Combine robust coarse alignment with fine G-ICP refinement to place each reconstruction into the Quest world frame.</p></article>
-        <article data-reveal><span>03</span><h3>Compare</h3><p>Reveal reconstruction and live video see-through through a movable volumetric alpha mask.</p></article>
+
+    <figure class="project-figure project-figure-primary" data-reveal>
+      <img src={`${base}/media/mr-compare/teaser.jpg`} alt="The MR-Compare end-to-end pipeline" width="1657" height="1062" />
+      <figcaption>
+        <span>MR-Compare registers mesh and 3D Gaussian Splatting reconstructions to the physical world, then supports in-headset visual comparison through a geometry-driven 3D Slider.</span>
+        <a href={`${base}/media/mr-compare/teaser.jpg`} target="_blank" rel="noreferrer">Open full resolution ↗</a>
+      </figcaption>
+    </figure>
+
+    <section class="project-academic-section shell section-rule" id="abstract">
+      <header class="project-academic-heading" data-reveal><p class="kicker">01 · Paper</p><h2>Abstract</h2></header>
+      <div class="project-prose" data-reveal>
+        <p>MR-Compare is a spatially grounded mixed reality framework for comparing heterogeneous 3D reconstructions with the live physical world. Implemented on Meta Quest 3, the system aligns mesh and 3D Gaussian Splatting reconstructions to the headset's world coordinate system and enables cross-media comparison between reconstructed scenes and live video see-through.</p>
+        <p>The paper evaluates MR-Compare through a real-world benchmark and an exploratory user study with 30 participants, covering practical desktop and mobile reconstruction workflows. The results show centimetre-level registration across tested workflows and strong visual consistency for desktop 3DGS-based reconstructions.</p>
       </div>
     </section>
-    <figure class="project-figure shell" data-reveal><img src="/media/mr-compare/visual-comparison.jpg" alt="Registered reconstruction comparison examples in two physical rooms" width="1600" height="900" loading="lazy" /><figcaption>Five reconstruction workflows, spanning meshes and 3DGS, desktop and mobile capture.</figcaption></figure>
-    <section class="project-section shell section-rule findings">
-      <div class="section-heading" data-reveal><p class="kicker">Evaluation</p><h2>What the system revealed.</h2></div>
-      <div class="finding-grid"><article data-reveal><strong>30</strong><p>participants in an exploratory mixed-reality study</p></article><article data-reveal><strong>5</strong><p>representative reconstruction workflows</p></article><article data-reveal><strong>cm</strong><p>centimetre-level registration across tested settings</p></article><article data-reveal><strong>0-shot</strong><p>anisotropy filtering for robust 3DGS source selection</p></article></div>
+
+    <section class="project-academic-section shell section-rule" id="demo">
+      <header class="project-academic-heading" data-reveal><p class="kicker">02 · Media</p><h2>Demo</h2></header>
+      <div class="project-prose" data-reveal>
+        <p>This demo shows the final MR-Compare outcome in an office scene. Heterogeneous 3D reconstructions have already been registered to the physical space, allowing the user to switch between the aligned reconstruction and the live environment, and to inspect the result with the 3D Slider.</p>
+        <video class="project-video" controls playsinline preload="metadata">
+          <source src={`${base}/media/mr-compare/office-demo.mp4`} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <p class="project-media-caption">Final outcome demo: five registered reconstruction outputs aligned with the physical office, including standard 3DGS, RealityScan dense mesh, Scaniverse 3DGS splat, Polycam mesh, and 3DGS-MCMC. The demo shows switching between reconstructions and visualization with the 3D Slider.</p>
+      </div>
     </section>
-    <section class="project-outro shell section-rule" data-reveal><p class="kicker">Project status</p><h2>Conditionally accepted at IEEE ISMAR 2026.</h2><div class="link-row"><a class="text-link" href="https://github.com/changruizhu96/MR-Compare" target="_blank" rel="noreferrer">View code <span aria-hidden="true">↗</span></a><a class="text-link" href="mailto:changrui.zhu.19@ucl.ac.uk">Discuss the work <span aria-hidden="true">↗</span></a></div></section>
+
+    <section class="project-academic-section shell section-rule" id="method">
+      <header class="project-academic-heading" data-reveal><p class="kicker">03 · Method</p><h2>System overview</h2></header>
+      <div class="project-prose" data-reveal>
+        <p>The teaser summarises MR-Compare as a single source-to-interaction pipeline. The system first converts heterogeneous reconstructions and headset observations into comparable point-cloud representations, then uses coarse-to-fine registration to place the reconstruction in the Quest world coordinate system before enabling in-headset visual comparison.</p>
+        <ol class="project-method-list">
+          <li><span>(a)</span><div><h3>Source point collection</h3><p>Each reconstruction is converted into a source point cloud: mesh vertices for mesh workflows and Gaussian centres for 3DGS workflows. A radius crop and optional voxel-hash density filter remove distant background content, skyboxes, and isolated floating points before registration.</p></div></li>
+          <li><span>(b)</span><div><h3>Target point collection</h3><p>The Quest-side target cloud is built from the Meta Quest 3 Depth API. A point cloud generator raycasts screen-space samples into world-space points, while chunked storage and density caps keep the scan practical for in-headset use.</p></div></li>
+          <li><span>(c)</span><div><h3>Coarse registration</h3><p>After voxelisation reduces density mismatch, FPFH-based correspondences provide a global initialisation. MR-Compare supports robust coarse estimators such as TEASER++ and TurboReg, producing an initial alignment between reconstruction and headset scan.</p></div></li>
+          <li><span>(d)</span><div><h3>Fine registration</h3><p>The coarse transform is refined with G-ICP or V-GICP through the small_gicp backend. The resulting transform is persisted in the Quest world coordinate system so the aligned asset remains spatially grounded during comparison.</p></div></li>
+          <li><span>(e)</span><div><h3>XR interactive comparison</h3><p>The final interface combines the registered reconstruction with live video see-through. A geometry-driven 3D Slider uses a movable volumetric alpha mask, letting users reveal reconstruction and physical-world content in the same spatial frame.</p></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="project-academic-section shell section-rule" id="comparison">
+      <header class="project-academic-heading" data-reveal><p class="kicker">04 · Output</p><h2>Visual comparison</h2></header>
+      <div class="project-prose" data-reveal>
+        <p>The system is designed for situations where the physical room is still accessible but the user also has reconstructed digital versions of that room. MR-Compare registers each reconstruction to the live MR coordinate system, so the user can inspect where a reconstruction agrees with, deviates from, or visually complements the current physical environment.</p>
+        <figure class="project-inline-figure project-inline-figure-wide">
+          <img src={`${base}/media/mr-compare/visual-comparison-overview.png`} alt="Two physical room views compared across five reconstruction workflows" width="4237" height="1374" loading="lazy" />
+          <figcaption><span>High-resolution comparison from the paper: two physical viewpoints shown across the evaluated reconstruction workflows.</span><a href={`${base}/media/mr-compare/visual-comparison-overview.png`} target="_blank" rel="noreferrer">Open full resolution ↗</a></figcaption>
+        </figure>
+        <figure class="project-inline-figure project-inline-figure-wide project-inline-figure-detail">
+          <img src={`${base}/media/mr-compare/visual-comparison-room-views.png`} alt="Expanded grid of registered comparison views across two rooms and five reconstruction workflows" width="4237" height="4501" loading="lazy" />
+          <figcaption><span>Extended comparison across two rooms: additional viewpoints show reconstruction behaviour across local geometry, surfaces, and viewing directions.</span><a href={`${base}/media/mr-compare/visual-comparison-room-views.png`} target="_blank" rel="noreferrer">Open full resolution ↗</a></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="project-academic-section shell section-rule" id="evaluation">
+      <header class="project-academic-heading" data-reveal><p class="kicker">05 · Evidence</p><h2>Evaluation</h2></header>
+      <div class="project-prose" data-reveal>
+        <p>The evaluation covers five representative reconstruction workflows: RealityScan mesh, Polycam mesh, desktop 3DGS, desktop 3DGS-MCMC, and Scaniverse 3DGS. The study combines objective registration and image-based consistency metrics with subjective ratings of perceived alignment, perceived visual consistency, usability, and cognitive workload.</p>
+        <p>A second controlled Replica evaluation complements the real-world study. It uses eight NICE-SLAM Replica indoor scenes, reconstructs each scene with 3DGS and 3DGS-MCMC, and generates Quest-like target scans from the Replica meshes to isolate registration behaviour under reproducible conditions.</p>
+        <p>In this setting, MR-Compare evaluates a zero-shot anisotropy filter for 3DGS source point selection. Sweeping the anisotropy threshold shows that moderate pruning can rescue failed registrations and reduce both translation and rotation error. The reported gains are larger for standard 3DGS, with reductions of 0.35 cm / 37.6% and 0.08 degrees / 38.7%, while 3DGS-MCMC improves by 0.12 cm / 16.9% and 0.04 degrees / 29.1%.</p>
+        <p class="project-note">Evaluation figures are intentionally omitted from this version of the project page and can be added after the final paper assets are prepared.</p>
+      </div>
+    </section>
+
+    <section class="project-academic-section shell section-rule" id="citation">
+      <header class="project-academic-heading" data-reveal><p class="kicker">06 · Record</p><h2>Status & citation</h2></header>
+      <div class="project-prose" data-reveal>
+        <p>MR-Compare has been conditionally accepted for publication in IEEE Transactions on Visualization and Computer Graphics (TVCG) in conjunction with IEEE ISMAR 2026. The public preprint and camera-ready citation will be added when available.</p>
+        <p class="project-citation-label">Provisional BibTeX</p>
+        <pre class="project-bibtex"><code>{bibtex}</code></pre>
+      </div>
+    </section>
   </main>
-  <footer class="site-footer shell"><p>Changrui Zhu</p><a href="/">Back to index ↑</a><p>© {new Date().getFullYear()}</p></footer>
+  <footer class="site-footer shell"><p>Changrui Zhu</p><a href={`${base}/`}>Back to index ↑</a><p>© {new Date().getFullYear()}</p></footer>
 </BaseLayout>

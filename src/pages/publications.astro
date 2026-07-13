@@ -1,0 +1,58 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import { publications } from "../data/site";
+
+const shifts = [0, 34, 68, 34, 0];
+---
+
+<BaseLayout title="Publications · Changrui Zhu" description="A spatial collection of publications in mixed reality, human perception, 3D comparison, and human-robot interaction.">
+  <SiteHeader current="publications" />
+  <main id="main" class="publications-page">
+    <header class="collection-hero shell">
+      <p class="eyebrow"><span>Research collection · 05 works</span><span>2019—2026</span></p>
+      <div class="collection-hero-grid">
+        <h1>Publications</h1>
+        <div>
+          <p class="collection-statement">A set of research traces across perception, spatial computing, and intelligent systems.</p>
+          <p class="collection-note">Each work captures a different coordinate: what people perceive, how worlds are represented, and where computational systems meet human judgement.</p>
+        </div>
+      </div>
+      <div class="collection-coordinates" aria-label="Collection dimensions">
+        <span><b>X</b> Perception</span><span><b>Y</b> Space</span><span><b>Z</b> Systems</span>
+      </div>
+    </header>
+
+    <section class="publication-space shell section-rule" aria-labelledby="collection-title">
+      <div class="collection-intro" data-reveal>
+        <div><p class="kicker">Collection index</p><p class="archive-count">Sorted by publication date</p></div>
+        <h2 id="collection-title">Research planes<br />through time.</h2>
+      </div>
+
+      <div class="space-axis" aria-hidden="true"><span>TIME</span><span>DEPTH</span></div>
+      <div class="collection-list">
+        {publications.map((publication, index) => (
+          <article class="collection-entry" style={`--entry-shift: ${shifts[index]}px; --entry-depth: ${index};`} data-reveal>
+            <div class="entry-index"><span>0{index + 1}</span><span>{publication.year}</span></div>
+            <div class="entry-body">
+              <div class="entry-meta"><span>{publication.venue}</span><span>{publication.kind}</span></div>
+              <h3>{publication.title}</h3>
+              <p class="entry-summary">{publication.summary}</p>
+              <p class="entry-authors">{publication.authors}</p>
+              <div class="entry-footer">
+                <div class="entry-topics">{publication.topics.map((topic) => <span>{topic}</span>)}</div>
+                <a href={publication.href} target="_blank" rel="noreferrer" aria-label={`Open ${publication.title}`}>Open record <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="collection-outro" data-reveal>
+        <p>For citation counts and the complete external record.</p>
+        <a class="text-link" href="https://scholar.google.com/citations?user=gjFTZ9EAAAAJ" target="_blank" rel="noreferrer">Google Scholar <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer shell"><p>Changrui Zhu</p><a href={`${import.meta.env.BASE_URL}`}>Back to index ↑</a><p>© {new Date().getFullYear()}</p></footer>
+</BaseLayout>
