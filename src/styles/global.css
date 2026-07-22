@@ -182,8 +182,6 @@ img { display: block; max-width: 100%; }
 .project-inline-figure img { width: 100%; height: auto; object-fit: contain; background: #fbfbfa; }
 .project-inline-figure figcaption { display: flex; justify-content: space-between; gap: 1.5rem; margin-top: .8rem; color: var(--muted); font: .7rem/1.6 var(--mono); text-transform: uppercase; }
 .project-inline-figure figcaption a { flex: 0 0 auto; padding-bottom: .1rem; border-bottom: 1px solid currentColor; color: var(--ink); }
-.project-citation-label { margin-top: 2rem !important; font: .72rem/1.5 var(--mono) !important; text-transform: uppercase; }
-.project-bibtex { margin: .8rem 0 0; padding: 1rem; overflow-x: auto; border: 1px solid var(--line); background: rgba(127,127,127,.06); font: .72rem/1.6 var(--mono); white-space: pre; }
 .not-found { min-height: calc(100vh - 84px); display: flex; flex-direction: column; justify-content: center; }
 .not-found h1 { max-width: 900px; margin: 2rem 0 4rem; font-size: clamp(2.8rem, 5.5vw, 5.4rem); font-weight: 500; letter-spacing: -.055em; line-height: 1; }
 .not-found .text-link { align-self: flex-start; }

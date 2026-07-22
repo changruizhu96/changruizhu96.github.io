@@ -2,12 +2,6 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-const bibtex = `@article{zhu2026mrcompare,
-  title   = {MR-Compare: A Mixed-Reality Framework for Spatially Grounded Visual Comparison of Heterogeneous 3D Reconstructions with Reality},
-  author  = {Zhu, Changrui and Kruijff, Ernst and Zhang, Pengju and Julier, Simon},
-  journal = {IEEE Transactions on Visualization and Computer Graphics},
-  year    = {2026}
-}`;
 ---
 <BaseLayout
   title="MR-Compare · Changrui Zhu"
@@ -100,14 +94,6 @@ const bibtex = `@article{zhu2026mrcompare,
       </div>
     </section>
 
-    <section class="project-academic-section shell section-rule" id="citation">
-      <header class="project-academic-heading" data-reveal><p class="kicker">06 · Record</p><h2>Citation</h2></header>
-      <div class="project-prose" data-reveal>
-        <p>The public preprint and final citation will be added when available.</p>
-        <p class="project-citation-label">Provisional BibTeX</p>
-        <pre class="project-bibtex"><code>{bibtex}</code></pre>
-      </div>
-    </section>
   </main>
   <footer class="site-footer shell"><p>Changrui Zhu</p><a href={`${base}/`}>Back to index ↑</a><p>© {new Date().getFullYear()}</p></footer>
 </BaseLayout>
