@@ -4,7 +4,7 @@
 
 - `src/pages/index.astro` renders an identity-first research homepage: author and research focus, the interactive change-blindness premise, an outside-the-test bridge from perception to spatial computing, featured work, the three newest publication records from shared data, and a colour-portrait biography.
 - `src/pages/publications.astro` renders the complete publication collection as a spatial archive ordered by date.
-- `src/pages/work/mr-compare.astro` renders a source-faithful academic project page with paper metadata, abstract, local demo video, five-stage system workflow, visual comparison, evaluation summary, status, and provisional citation.
+- `src/pages/work/mr-compare.astro` renders a source-faithful academic project page with paper metadata, abstract, local demo video, five-stage system workflow, visual comparison, evaluation summary, and provisional citation.
 - `src/data/site.ts` is the structured source for identity, links, and publication records.
 - `src/components/ChangeBlindnessTest.astro` owns only the change-blindness task itself: its truthful perceptual framing, rotated isometric Canvas rendering, the user-adjustable blank-gap timer, hit testing, feedback, and reduced-motion controls. Broader research interpretation remains in the page that embeds it.
 - `src/lib/changeBlindnessScene.mjs` deterministically generates a 20-object mixed-primitive scene pair from a seed; one projection-visible target is sampled across balanced depth bands and then moves by at least one footprint, appears, disappears, is replaced, or changes colour.
