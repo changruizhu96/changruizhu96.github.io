@@ -56,7 +56,7 @@ const bibtex = `@misc{zhu2026mrcompare,
       <header class="project-academic-heading" data-reveal><p class="kicker">02 · Media</p><h2>Demo</h2></header>
       <div class="project-prose" data-reveal>
         <p>This demo shows the final MR-Compare outcome in an office scene. Heterogeneous 3D reconstructions have already been registered to the physical space, allowing the user to switch between the aligned reconstruction and the live environment, and to inspect the result with the 3D Slider.</p>
-        <video class="project-video" controls playsinline preload="metadata">
+        <video class="project-video" controls muted playsinline preload="metadata" data-autoplay-on-view aria-label="MR-Compare office demonstration">
           <source src={`${base}/media/mr-compare/office-demo.mp4`} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
@@ -114,4 +114,19 @@ const bibtex = `@misc{zhu2026mrcompare,
 
   </main>
   <footer class="site-footer shell"><p>Changrui Zhu</p><a href={`${base}/`}>Back to index ↑</a><p>© {new Date().getFullYear()}</p></footer>
+  <script>
+    const demoVideo = document.querySelector<HTMLVideoElement>("[data-autoplay-on-view]");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (demoVideo && !reducedMotion.matches) {
+      const autoplayObserver = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) void demoVideo.play().catch(() => {});
+          else demoVideo.pause();
+        }
+      }, { threshold: 0.5 });
+
+      autoplayObserver.observe(demoVideo);
+    }
+  </script>
 </BaseLayout>
