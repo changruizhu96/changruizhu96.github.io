@@ -1,3 +1,20 @@
+import automaticPublications from "./auto-publications.json";
+import { mergePublications } from "../lib/publications.mjs";
+
+export type Publication = {
+  year: string;
+  venue: string;
+  kind: string;
+  title: string;
+  authors: string;
+  summary?: string;
+  topics: string[];
+  href: string;
+  doi?: string;
+  arxivId?: string;
+  published?: string;
+};
+
 export const site = {
   name: "Changrui Zhu",
   role: "PhD researcher · Spatial computing · UCL",
@@ -11,7 +28,7 @@ export const site = {
   ],
 };
 
-export const publications = [
+const curatedPublications = [
   {
     year: "2026",
     venue: "arXiv",
@@ -72,4 +89,9 @@ export const publications = [
     topics: ["Emotion recognition", "Speech", "Human-robot interaction"],
     href: "https://ieeexplore.ieee.org/document/8877543",
   },
-];
+] satisfies Publication[];
+
+export const publications = mergePublications(
+  curatedPublications,
+  automaticPublications,
+) as Publication[];

@@ -4,13 +4,16 @@ import SiteHeader from "../components/SiteHeader.astro";
 import { publications } from "../data/site";
 
 const shifts = [0, 34, 68, 34, 0];
+const publicationCount = String(publications.length).padStart(2, "0");
+const years = publications.map((publication) => Number(publication.year)).filter(Number.isFinite);
+const yearRange = `${Math.min(...years)}—${Math.max(...years)}`;
 ---
 
 <BaseLayout title="Publications · Changrui Zhu" description="A spatial collection of publications in mixed reality, human perception, 3D comparison, and human-robot interaction.">
   <SiteHeader current="publications" />
   <main id="main" class="publications-page">
     <header class="collection-hero shell">
-      <p class="eyebrow"><span>Research collection · 05 works</span><span>2019—2026</span></p>
+      <p class="eyebrow"><span>Research collection · {publicationCount} works</span><span>{yearRange}</span></p>
       <div class="collection-hero-grid">
         <h1>Publications</h1>
         <div>
@@ -32,12 +35,12 @@ const shifts = [0, 34, 68, 34, 0];
       <div class="space-axis" aria-hidden="true"><span>TIME</span><span>DEPTH</span></div>
       <div class="collection-list">
         {publications.map((publication, index) => (
-          <article class="collection-entry" style={`--entry-shift: ${shifts[index]}px; --entry-depth: ${index};`} data-reveal>
-            <div class="entry-index"><span>0{index + 1}</span><span>{publication.year}</span></div>
+          <article class="collection-entry" style={`--entry-shift: ${shifts[index % shifts.length]}px; --entry-depth: ${index};`} data-reveal>
+            <div class="entry-index"><span>{String(index + 1).padStart(2, "0")}</span><span>{publication.year}</span></div>
             <div class="entry-body">
               <div class="entry-meta"><span>{publication.venue}</span><span>{publication.kind}</span></div>
               <h3>{publication.title}</h3>
-              <p class="entry-summary">{publication.summary}</p>
+              {publication.summary && <p class="entry-summary">{publication.summary}</p>}
               <p class="entry-authors">{publication.authors}</p>
               <div class="entry-footer">
                 <div class="entry-topics">{publication.topics.map((topic) => <span>{topic}</span>)}</div>

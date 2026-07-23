@@ -1,0 +1,70 @@
+[
+  {
+    "year": "2026",
+    "venue": "arXiv",
+    "kind": "Preprint",
+    "title": "MR-Compare: A Mixed-Reality Framework for Spatially Grounded Visual Comparison of 3D Gaussian Splatting and Mesh Reconstructions with the Physical Environment",
+    "authors": "Changrui Zhu, Ernst Kruijff, Pengju Zhang, Simon Julier",
+    "topics": [
+      "Computer graphics"
+    ],
+    "href": "https://arxiv.org/abs/2607.20325",
+    "arxivId": "2607.20325",
+    "published": "2026-07-22"
+  },
+  {
+    "year": "2025",
+    "venue": "Proceedings of the 38th Annual ACM Symposium on User Interface Software and Technology",
+    "kind": "Conference paper",
+    "title": "Do You See What I See? Bring Live Pedestrians into an Outdoor Collaborative Mixed Reality Experience",
+    "authors": "Jingyi Zhang, Ziwen Lu, Changrui Zhu, Simon Julier, Anthony Steed",
+    "topics": [],
+    "href": "https://doi.org/10.1145/3746059.3747667",
+    "doi": "10.1145/3746059.3747667",
+    "published": "2025-09-28"
+  },
+  {
+    "year": "2025",
+    "venue": "Proceedings of the International Symposium on Automation and Robotics in Construction (IAARC)",
+    "kind": "Conference paper",
+    "title": "Enabling human-robot collaboration in unstructured construction environment through sharing control: Classification, Challenges, and Future Trends",
+    "authors": "Guohao Wang, Changrui Zhu, Honghu Chu, Abdul-majeed Mahamadu, Vijay M. Pawar",
+    "topics": [],
+    "href": "https://doi.org/10.22260/isarc2025/0117",
+    "doi": "10.22260/isarc2025/0117",
+    "published": "2025-07-27"
+  },
+  {
+    "year": "2025",
+    "venue": "IEEE Transactions on Visualization and Computer Graphics",
+    "kind": "Journal article",
+    "title": "Evaluating 3D Visual Comparison Techniques for Change Detection in Virtual Reality",
+    "authors": "Changrui Zhu, Ernst Kruijff, Vijay M. Pawar, Simon Julier",
+    "topics": [],
+    "href": "https://doi.org/10.1109/tvcg.2025.3549578",
+    "doi": "10.1109/tvcg.2025.3549578",
+    "published": "2025-05-01"
+  },
+  {
+    "year": "2025",
+    "venue": "Elsevier BV",
+    "kind": "Preprint",
+    "title": "Does Display Type Matter for Change Detection? Comparing Immersive and Non-Immersive Displays under Low and High Semantic Availability",
+    "authors": "Changrui Zhu, Ernst Kruijff, Harvey Stedman, Vijay Pawar, Simon Julier",
+    "topics": [],
+    "href": "https://doi.org/10.2139/ssrn.5771193",
+    "doi": "10.2139/ssrn.5771193",
+    "published": "2025-01-01"
+  },
+  {
+    "year": "2019",
+    "venue": "2019 IEEE Intl Conf on Dependable, Autonomic and Secure Computing, Intl Conf on Pervasive Intelligence and Computing, Intl Conf on Cloud and Big Data Computing, Intl Conf on Cyber Science and Technology Congress (DASC/PiCom/CBDCom/CyberSciTech)",
+    "kind": "Conference paper",
+    "title": "Emotion Recognition from Speech to Improve Human-Robot Interaction",
+    "authors": "Changrui Zhu, Wasim Ahmad",
+    "topics": [],
+    "href": "https://doi.org/10.1109/dasc/picom/cbdcom/cyberscitech.2019.00076",
+    "doi": "10.1109/dasc/picom/cbdcom/cyberscitech.2019.00076",
+    "published": "2019-08-01"
+  }
+]
