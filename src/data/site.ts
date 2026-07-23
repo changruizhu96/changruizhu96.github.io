@@ -14,6 +14,16 @@ export const site = {
 export const publications = [
   {
     year: "2026",
+    venue: "arXiv",
+    kind: "Preprint",
+    title: "MR-Compare: A Mixed-Reality Framework for Spatially Grounded Visual Comparison of 3D Gaussian Splatting and Mesh Reconstructions with the Physical Environment",
+    authors: "Changrui Zhu, Ernst Kruijff, Pengju Zhang, Simon Julier",
+    summary: "A mixed-reality framework that spatially registers 3D Gaussian Splatting and mesh reconstructions with the physical environment for in-headset visual comparison.",
+    topics: ["Mixed reality", "3D reconstruction", "Spatial registration"],
+    href: "https://arxiv.org/abs/2607.20325",
+  },
+  {
+    year: "2026",
     venue: "Displays",
     kind: "Journal article",
     title: "Does display type matter for change detection? Comparing immersive and non-immersive displays under low and high semantic availability",
