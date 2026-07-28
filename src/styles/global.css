@@ -150,6 +150,7 @@ img { display: block; max-width: 100%; }
 .project-hero { padding: 4.5rem 0 3.5rem; }
 .project-hero h1 { margin: 3.5rem 0 1rem; font-size: clamp(3.4rem, 8vw, 6.5rem); font-weight: 500; letter-spacing: -.065em; line-height: .92; }
 .project-paper-title { max-width: 980px; margin: 1.5rem 0 0; font-size: clamp(1.45rem, 2.3vw, 2.35rem); letter-spacing: -.035em; line-height: 1.2; }
+.project-paper-status { margin: 1.35rem 0 0; color: var(--signal); font: .78rem/1.5 var(--mono); letter-spacing: .04em; text-transform: uppercase; }
 .project-authors { margin: 2.2rem 0 .45rem; font-size: 1.02rem; line-height: 1.7; }
 .project-authors a { border-bottom: 1px solid var(--line); }
 .project-authors sup, .project-affiliations sup { color: var(--signal); font: .65rem var(--mono); }

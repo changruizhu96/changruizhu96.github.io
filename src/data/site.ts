@@ -31,8 +31,8 @@ export const site = {
 const curatedPublications = [
   {
     year: "2026",
-    venue: "arXiv",
-    kind: "Preprint",
+    venue: "IEEE TVCG",
+    kind: "Journal article",
     title: "MR-Compare: A Mixed-Reality Framework for Spatially Grounded Visual Comparison of 3D Gaussian Splatting and Mesh Reconstructions with the Physical Environment",
     authors: "Changrui Zhu, Ernst Kruijff, Pengju Zhang, Simon Julier",
     summary: "A mixed-reality framework that spatially registers 3D Gaussian Splatting and mesh reconstructions with the physical environment for in-headset visual comparison.",
