@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600&display=swap");
 
 :root {
-  --paper: #f7f6f2; --ink: #171916; --muted: #686b63; --line: rgba(23, 25, 22, 0.18); --signal: #a8ff2f;
+  --paper: #f7f6f2; --ink: #171916; --muted: #686b63; --line: rgba(23, 25, 22, 0.18); --signal: #2f6f64; --on-signal: #f7f6f2;
   --sans: "Manrope", system-ui, sans-serif; --mono: "DM Mono", monospace; --shell: min(1180px, calc(100vw - 48px));
 }
 * { box-sizing: border-box; }
@@ -9,9 +9,9 @@ html { background: var(--paper); color: var(--ink); scroll-behavior: smooth; }
 body { margin: 0; font-family: var(--sans); font-size: 16px; line-height: 1.55; }
 a { color: inherit; text-decoration: none; }
 img { display: block; max-width: 100%; }
-::selection { background: var(--signal); color: var(--ink); }
+::selection { background: var(--signal); color: var(--on-signal); }
 .shell { width: var(--shell); margin-inline: auto; }
-.skip-link { position: fixed; left: 1rem; top: -4rem; z-index: 20; padding: .7rem 1rem; background: var(--signal); transition: top .2s; }
+.skip-link { position: fixed; left: 1rem; top: -4rem; z-index: 20; padding: .7rem 1rem; background: var(--signal); color: var(--on-signal); transition: top .2s; }
 .skip-link:focus { top: 1rem; }
 
 .site-header { width: var(--shell); height: 84px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: .78rem; letter-spacing: .04em; text-transform: uppercase; }
@@ -61,7 +61,7 @@ img { display: block; max-width: 100%; }
 .change-controls { position: absolute; z-index: 5; left: 1rem; right: 1rem; bottom: 1rem; display: flex; align-items: end; justify-content: space-between; gap: 1rem; }
 .change-status { max-width: 58%; margin: 0; color: var(--muted); font: .7rem/1.45 var(--mono); text-transform: uppercase; }
 .change-actions { display: flex; flex-wrap: wrap; justify-content: end; gap: .9rem; }
-.change-test.is-running .change-view { background: var(--signal); color: var(--ink); }
+.change-test.is-running .change-view { background: var(--signal); color: var(--on-signal); }
 .change-bridge { display: grid; grid-template-columns: minmax(140px, .8fr) minmax(0, 1.2fr); gap: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--line); }
 .change-bridge p { margin: 0; }
 .change-bridge-label { font: .7rem/1.5 var(--mono); letter-spacing: .04em; text-transform: uppercase; }
@@ -85,7 +85,7 @@ img { display: block; max-width: 100%; }
 .work-visual-concept:hover img { filter: none; transform: scale(1.012); }
 .work-tag { position: absolute; z-index: 2; padding: .36rem .5rem; background: var(--paper); font: .6rem var(--mono); text-transform: uppercase; }
 .tag-one { left: 5%; top: 10%; }
-.tag-two { right: 7%; bottom: 12%; background: var(--signal); }
+.tag-two { right: 7%; bottom: 12%; background: var(--signal); color: var(--on-signal); }
 .work-lead { max-width: 520px; margin: 0; font-size: clamp(1.3rem, 1.8vw, 1.8rem); line-height: 1.35; letter-spacing: -.025em; }
 .work-meta { margin: auto 0 2.5rem; padding-top: 3rem; }
 .work-meta p { margin: 0 0 .35rem; color: var(--muted); font: .73rem/1.5 var(--mono); text-transform: uppercase; }
@@ -190,7 +190,7 @@ img { display: block; max-width: 100%; }
 [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
 [data-reveal].is-visible { opacity: 1; transform: none; }
 @media (prefers-color-scheme: dark) {
-  :root { --paper: #161815; --ink: #eeede6; --muted: #a7aa9e; --line: rgba(239,238,230,.2); }
+  :root { --paper: #161815; --ink: #eeede6; --muted: #a7aa9e; --line: rgba(239,238,230,.2); --signal: #7fc7b5; --on-signal: #161815; }
   .portrait-wrap img { filter: brightness(.88) contrast(1.03); }
   .work-visual-concept { background: #f8f8f8; }
   .work-visual-concept img { mix-blend-mode: normal; }
