@@ -35,7 +35,7 @@ const curatedPublications = [
     kind: "Journal article",
     title: "MR-Compare: A Mixed-Reality Framework for Spatially Grounded Visual Comparison of 3D Gaussian Splatting and Mesh Reconstructions with the Physical Environment",
     authors: "Changrui Zhu, Ernst Kruijff, Pengju Zhang, Simon Julier",
-    summary: "A mixed-reality framework that spatially registers 3D Gaussian Splatting and mesh reconstructions with the physical environment for in-headset visual comparison.",
+    summary: "A mixed-reality framework that spatially registers 3D Gaussian Splatting and mesh reconstructions with the physical environment for in-headset visual comparison. Recipient of an ISMAR 2026 Best Paper Award Honorable Mention.",
     topics: ["Mixed reality", "3D reconstruction", "Spatial registration"],
     href: "https://arxiv.org/abs/2607.20325",
   },

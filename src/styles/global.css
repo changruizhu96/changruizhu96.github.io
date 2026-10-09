@@ -89,6 +89,8 @@ img { display: block; max-width: 100%; }
 .work-lead { max-width: 520px; margin: 0; font-size: clamp(1.3rem, 1.8vw, 1.8rem); line-height: 1.35; letter-spacing: -.025em; }
 .work-meta { margin: auto 0 2.5rem; padding-top: 3rem; }
 .work-meta p { margin: 0 0 .35rem; color: var(--muted); font: .73rem/1.5 var(--mono); text-transform: uppercase; }
+.work-meta .work-award { color: var(--ink); font-weight: 500; }
+.work-award a { border-bottom: 1px solid currentColor; }
 .work-copy .text-link { align-self: flex-start; }
 
 .archive-count { margin: 1rem 0 0; color: var(--muted); font: .73rem/1.5 var(--mono); text-transform: uppercase; }
@@ -151,6 +153,8 @@ img { display: block; max-width: 100%; }
 .project-hero h1 { margin: 3.5rem 0 1rem; font-size: clamp(3.4rem, 8vw, 6.5rem); font-weight: 500; letter-spacing: -.065em; line-height: .92; }
 .project-paper-title { max-width: 980px; margin: 1.5rem 0 0; font-size: clamp(1.45rem, 2.3vw, 2.35rem); letter-spacing: -.035em; line-height: 1.2; }
 .project-paper-status { width: fit-content; margin: 1.35rem 0 0; padding: .55rem .75rem; background: var(--ink); color: var(--paper); font: 500 clamp(.88rem, 1.15vw, 1rem)/1.4 var(--mono); letter-spacing: .035em; text-transform: uppercase; }
+.project-paper-award { display: block; margin-top: .65rem; border: 1px solid var(--ink); background: transparent; color: var(--ink); font-size: clamp(.78rem, 1vw, .9rem); }
+.project-paper-award:hover { background: var(--ink); color: var(--paper); }
 .project-authors { margin: 2.2rem 0 .45rem; font-size: 1.02rem; line-height: 1.7; }
 .project-authors a { border-bottom: 1px solid var(--line); }
 .project-authors sup, .project-affiliations sup { color: var(--signal); font: .65rem var(--mono); }
