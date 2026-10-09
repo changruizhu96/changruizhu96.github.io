@@ -86,7 +86,7 @@ img { display: block; max-width: 100%; }
 .work-tag { position: absolute; z-index: 2; padding: .36rem .5rem; background: var(--paper); font: .6rem var(--mono); text-transform: uppercase; }
 .tag-one { left: 5%; top: 10%; }
 .tag-two { right: 7%; bottom: 12%; background: var(--signal); color: var(--on-signal); }
-.work-recognition { margin: -1rem 0 1.5rem; font: 500 .73rem/1.5 var(--mono); letter-spacing: .025em; text-transform: uppercase; }
+.work-recognition { margin: 1.5rem 0 0; font: 500 .73rem/1.5 var(--mono); letter-spacing: .025em; text-transform: uppercase; }
 .work-recognition p { margin: 0 0 .35rem; color: var(--muted); }
 .work-recognition a { border-bottom: 1px solid currentColor; color: var(--ink); }
 .work-lead { max-width: 520px; margin: 0; font-size: clamp(1.3rem, 1.8vw, 1.8rem); line-height: 1.35; letter-spacing: -.025em; }
