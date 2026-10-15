@@ -77,8 +77,8 @@ const recentPublications = publications.slice(0, 3);
       <div class="home-publication-list">
         {recentPublications.map((publication) => (
           <a class="home-publication-entry" href={publication.href} target="_blank" rel="noreferrer" data-reveal aria-label={`Open ${publication.title}`}>
-            <p class="home-publication-meta"><span>{publication.year}</span><span>{publication.venue}</span></p>
-            <div><h3>{publication.title}</h3><p>{publication.authors}</p></div>
+            <p class="home-publication-meta"><span>{publication.year}</span><span>{publication.venue}</span><span>{publication.kind}</span></p>
+            <div><h3>{publication.title}</h3>{publication.award && <p class="entry-meta"><span>{publication.award}</span></p>}<p>{publication.authors}</p></div>
             <span class="home-publication-arrow" aria-hidden="true">↗</span>
           </a>
         ))}

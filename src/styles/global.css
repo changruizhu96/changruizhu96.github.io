@@ -238,7 +238,7 @@ img { display: block; max-width: 100%; }
   .change-status { max-width: 100%; }
   .change-actions { justify-content: start; }
   .home-publication-entry { position: relative; grid-template-columns: 1fr; gap: .8rem; padding-right: 2rem; }
-  .home-publication-meta { flex-direction: row; gap: 1rem; }
+  .home-publication-meta { flex-direction: row; flex-wrap: wrap; gap: .35rem 1rem; }
   .home-publication-arrow { position: absolute; top: 1.6rem; right: 0; }
   .portrait-wrap { max-width: 240px; }
   .collection-coordinates { grid-template-columns: 1fr; }
