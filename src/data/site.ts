@@ -8,6 +8,7 @@ export type Publication = {
   title: string;
   authors: string;
   summary?: string;
+  award?: string;
   topics: string[];
   href: string;
   doi?: string;
@@ -31,11 +32,12 @@ export const site = {
 const curatedPublications = [
   {
     year: "2026",
-    venue: "IEEE TVCG",
-    kind: "Journal article",
+    venue: "IEEE ISMAR 2026",
+    kind: "IEEE TVCG Special Issue",
+    award: "Best Paper Award · Honorable Mention",
     title: "MR-Compare: A Mixed-Reality Framework for Spatially Grounded Visual Comparison of 3D Gaussian Splatting and Mesh Reconstructions with the Physical Environment",
     authors: "Changrui Zhu, Ernst Kruijff, Pengju Zhang, Simon Julier",
-    summary: "A mixed-reality framework that spatially registers 3D Gaussian Splatting and mesh reconstructions with the physical environment for in-headset visual comparison. Recipient of an ISMAR 2026 Best Paper Award Honorable Mention.",
+    summary: "A mixed-reality framework that spatially registers 3D Gaussian Splatting and mesh reconstructions with the physical environment for in-headset visual comparison.",
     topics: ["Mixed reality", "3D reconstruction", "Spatial registration"],
     href: "https://arxiv.org/abs/2607.20325",
   },
@@ -61,8 +63,8 @@ const curatedPublications = [
   },
   {
     year: "2025",
-    venue: "IEEE TVCG",
-    kind: "Journal article",
+    venue: "IEEE VR 2025",
+    kind: "IEEE TVCG Special Issue",
     title: "Evaluating 3D Visual Comparison Techniques for Change Detection in Virtual Reality",
     authors: "Changrui Zhu, Ernst Kruijff, Vijay M. Pawar, Simon Julier",
     summary: "An evaluation of spatial comparison techniques for identifying change in immersive 3D environments.",

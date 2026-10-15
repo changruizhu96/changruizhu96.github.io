@@ -40,6 +40,7 @@ const yearRange = `${Math.min(...years)}—${Math.max(...years)}`;
             <div class="entry-body">
               <div class="entry-meta"><span>{publication.venue}</span><span>{publication.kind}</span></div>
               <h3>{publication.title}</h3>
+              {publication.award && <p class="entry-meta"><span>{publication.award}</span></p>}
               {publication.summary && <p class="entry-summary">{publication.summary}</p>}
               <p class="entry-authors">{publication.authors}</p>
               <div class="entry-footer">
