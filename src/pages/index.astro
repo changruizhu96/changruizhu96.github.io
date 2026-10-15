@@ -9,24 +9,19 @@ const recentPublications = publications.slice(0, 3);
 <BaseLayout>
   <SiteHeader />
   <main id="main">
-    <section class="hero shell">
+    <section class="hero shell profile-hero" id="about" aria-labelledby="profile-title">
       <div class="hero-copy" data-reveal>
         <p class="eyebrow"><span>PhD researcher · UCL</span><span>London, UK</span></p>
         <div class="hero-identity">
-          <h1 class="hero-name">{site.name}</h1>
+          <h1 class="hero-name" id="profile-title">{site.name}</h1>
           <p class="hero-role">Spatial computing · Extended reality · Cognitive science · 3D vision</p>
           <p class="hero-focus">{site.introduction}</p>
+          <p class="hero-focus">I am a PhD researcher at University College London, supervised by Prof. Simon Julier. Before UCL, I studied Electronic and Electrical Engineering at the University of Glasgow.</p>
+          <p class="hero-focus">Away from research, photography shapes how I observe space, light, and change.</p>
         </div>
-        <div class="hero-bottom"><p class="hero-statement">{site.statement}</p><a class="text-link" href="#work">Explore selected work <span aria-hidden="true">↓</span></a></div>
+        <div class="link-row">{site.links.map((link) => <a class="text-link" href={link.href} target={link.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">{link.label} <span aria-hidden="true">↗</span></a>)}</div>
       </div>
-      <div class="hero-visual" data-reveal>
-        <ChangeBlindnessTest />
-        <div class="change-bridge" aria-label="From perception to spatial computing">
-          <p class="change-bridge-label">From perception to spatial computing</p>
-          <p class="change-bridge-copy">What people notice, remember, and miss shapes how the world is carried into its digital forms.</p>
-        </div>
-      </div>
-      <p class="hero-index" aria-hidden="true">00—26</p>
+      <div class="portrait-wrap profile-portrait" data-reveal><img src={`${base}/media/portrait.jpeg`} alt="Changrui Zhu" width="900" height="900" loading="eager" /></div>
     </section>
 
     <section class="featured shell section-rule" id="work" aria-labelledby="work-title">
@@ -85,15 +80,21 @@ const recentPublications = publications.slice(0, 3);
       </div>
     </section>
 
-    <section class="about shell section-rule" id="about" aria-labelledby="about-title">
-      <div class="portrait-wrap" data-reveal><img src={`${base}/media/portrait.jpeg`} alt="Changrui Zhu" width="900" height="900" loading="lazy" /></div>
-      <div class="about-copy" data-reveal>
-        <p class="kicker">About the researcher</p><h2 id="about-title">I move between code, experiments, and lived spatial experience.</h2>
-        <p>I am a PhD researcher at University College London, supervised by Prof. Simon Julier. Before UCL, I studied Electronic and Electrical Engineering at the University of Glasgow.</p>
-        <p>My work joins Unity-based VR/MR development with 3D reconstruction, registration, and controlled user studies. Away from research, photography shapes how I observe space, light, and change.</p>
-        <div class="link-row">{site.links.map((link) => <a class="text-link" href={link.href} target={link.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">{link.label} <span aria-hidden="true">↗</span></a>)}</div>
-      </div>
+    <section class="home-game shell section-rule" aria-labelledby="game-title">
+      <header><p class="kicker">Attention · Memory · Perception</p><h2 id="game-title">Can you spot the change?</h2></header>
+      <div class="hero-visual" data-reveal><ChangeBlindnessTest /></div>
     </section>
   </main>
   <footer class="site-footer shell"><p>{site.name}</p><p>{site.role}</p><p>© {new Date().getFullYear()}</p></footer>
 </BaseLayout>
+
+<style>
+  .profile-hero { grid-template-columns: minmax(0, 1.4fr) minmax(0, .8fr); align-items: center; min-height: auto; }
+  .profile-hero .hero-identity { margin: 2.5rem 0 0; }
+  .profile-hero .hero-focus { max-width: 650px; }
+  .profile-portrait { width: 100%; }
+  .home-game { max-width: 760px; }
+  .home-game header { margin-bottom: 2rem; }
+  .home-game h2 { margin: 1rem 0 0; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 500; letter-spacing: -.05em; line-height: 1.1; }
+  @media (max-width: 900px) { .profile-hero { grid-template-columns: 1fr; } .profile-portrait { max-width: 320px; } }
+</style>

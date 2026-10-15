@@ -21,7 +21,7 @@ export const site = {
   role: "PhD researcher · Spatial computing · UCL",
   email: "changrui.zhu.19@ucl.ac.uk",
   statement: "Every space exists between the memory of what it was and the possibility of what it might become.",
-  introduction: "I build human-centred spatial intelligence systems for understanding and interacting across physical, reconstructed, and virtual environments. Bringing together 3D vision, extended reality, and cognitive science, my work explores how spatial representations can remain grounded in reality while becoming meaningful and useful to people.",
+  introduction: "I build systems for understanding and interacting with physical, reconstructed, and virtual environments. My work brings together 3D vision, VR/MR development, and studies of human perception, from reconstructing scenes and detecting change to how people compare and understand them.",
   links: [
     { label: "Google Scholar", href: "https://scholar.google.com/citations?user=gjFTZ9EAAAAJ" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/changrui-zhu-b078031bb" },
