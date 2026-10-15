@@ -253,3 +253,6 @@ img { display: block; max-width: 100%; }
   html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   [data-reveal] { opacity: 1; transform: none; }
 }
+
+.work-visual.change-cover, .work-visual.change-cover img { min-height: 0; }
+.work-visual.change-cover img { object-fit: contain; transform: none; }
