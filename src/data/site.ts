@@ -32,6 +32,18 @@ export const site = {
 const curatedPublications = [
   {
     year: "2026",
+    venue: "arXiv",
+    kind: "Preprint",
+    title: "Learning from Automatic 3D Gaussian Splatting Edits for Online Bayesian Scene Change Detection",
+    authors: "Changrui Zhu, Simon Julier",
+    summary: "Scene-specific evidence models learned from automatic reference-scene edits support online change detection through Bayesian evidence fusion and a shared 3D history.",
+    topics: ["Scene change detection", "3D Gaussian Splatting", "Bayesian inference"],
+    href: "https://arxiv.org/abs/2610.28490",
+    arxivId: "2610.28490",
+    published: "2026-10-20",
+  },
+  {
+    year: "2026",
     venue: "IEEE ISMAR 2026",
     kind: "IEEE TVCG Special Issue",
     award: "Best Paper Award · Honorable Mention",
