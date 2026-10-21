@@ -50,7 +50,7 @@
 <section class="intro"><div class="mono muted">Online scene change detection</div><h1>Learning from Automatic 3D Gaussian Splatting Edits for Online Bayesian Scene Change Detection</h1><p class="tagline">Learn what change looks like from edits. Update the evidence as new views arrive.</p><div class="intro-summary"><nav class="project-links" aria-label="Project resources"><a class="code-link mono" href="https://github.com/changruizhu96/learning-from-edits-for-scd" target="_blank" rel="noopener">Code <span aria-hidden="true">↗</span></a><a class="code-link mono" href="https://arxiv.org/abs/2610.28490" target="_blank" rel="noopener">arXiv <span aria-hidden="true">↗</span></a></nav><p class="byline">Changrui Zhu &amp; Simon Julier<span>University College London</span></p></div></section>
 <figure class="hero-film" aria-label="Change detection results viewed in 3D">
 <div class="hero-film-toolbar"><span class="mono muted">View results in 3D</span><div class="output-modes" role="group" aria-label="3D field display"><button data-field-output="probability" aria-pressed="true">Probability</button><button data-field-output="mask" aria-pressed="false">Mask</button></div></div>
-<video class="runtime-video" id="field-video" controls autoplay muted loop playsinline preload="metadata" width="1920" height="1080" poster="assets/change-field-final-modes-poster.jpg" aria-label="Four scenes with projected final refined probabilities or projected final masks, covering all 25 observed viewpoints per scene"><source src="assets/change-field-final-modes.mp4" type="video/mp4">Your browser does not support video playback. <a href="assets/change-field-final-modes.mp4">Download the comparison video.</a></video>
+<video class="runtime-video" id="field-video" controls muted loop playsinline preload="metadata" width="1920" height="1080" poster="assets/change-field-final-modes-poster.jpg" aria-label="Four scenes with projected final refined probabilities or projected final masks, covering all 25 observed viewpoints per scene"><source src="assets/change-field-final-modes.mp4" type="video/mp4">Your browser does not support video playback. <a href="assets/change-field-final-modes.mp4">Download the comparison video.</a></video>
 <figcaption class="figure-caption"><span id="field-caption">Final probabilities after refinement, projected onto the reference 3D scene.</span><span class="mono">4 scenes · 25 viewpoints each</span></figcaption>
 </figure>
 <section class="motivation" aria-labelledby="motivation-title">
@@ -127,7 +127,7 @@
 <section class="workflow" aria-labelledby="runtime-title">
 <div class="section-heading"><div><div class="mono muted">05 / Method in motion</div><h2 id="runtime-title">From evidence to refined masks.</h2></div><p>Follow a complete 25-view Porch sequence. First, combine current evidence, historical support and the fitted prior. Then compare the pixel masks with the final refined masks for the same observations.</p></div>
 <div class="hero-film-toolbar"><span class="mono muted">Jump to a chapter</span><div class="output-modes" role="group" aria-label="Method video chapter"><button type="button" data-method-start="0" aria-controls="runtime-video" aria-pressed="true">Bayesian update</button><button type="button" data-method-start="20" aria-controls="runtime-video" aria-pressed="false">Refinement</button></div></div>
-<video class="runtime-video" id="runtime-video" controls playsinline preload="metadata" width="1920" height="1080" poster="assets/bayesian-updates-and-refinement-poster.jpg" aria-label="Forty-second explanation of Bayesian evidence fusion followed by refinement before-and-after comparisons across all 25 Porch observations"><source src="assets/bayesian-updates-and-refinement.mp4" type="video/mp4">Your browser does not support video playback. <a href="assets/bayesian-updates-and-refinement.mp4">Download the method video.</a></video>
+<video class="runtime-video" id="runtime-video" controls muted loop playsinline preload="metadata" width="1920" height="1080" poster="assets/bayesian-updates-and-refinement-poster.jpg" aria-label="Forty-second explanation of Bayesian evidence fusion followed by refinement before-and-after comparisons across all 25 Porch observations"><source src="assets/bayesian-updates-and-refinement.mp4" type="video/mp4">Your browser does not support video playback. <a href="assets/bayesian-updates-and-refinement.mp4">Download the method video.</a></video>
 <div class="figure-caption"><span>00:00 Evidence fusion · 00:20 Refinement</span><span>Recorded outputs slowed for explanation; not a runtime demonstration.</span></div>
 <p class="edit-note">Runtime, measured separately: the full method averages 58.23 ms/frame (17.2 FPS) on RTX 5090, including the frontend; the pixel pipeline runs at 27.9 FPS. Timing covers all 25 frames across 20 PASLCD instances after initialization, including input waits and frame-to-frame overhead.</p>
 </section>
@@ -135,6 +135,23 @@
 </main><footer><span>Changrui Zhu · UCL</span><span>Learning from edits · Online scene change detection</span></footer>
 </div>
 <script>
+const videoVisibility=new Map();
+function updateVideoPlayback(video,visible){
+if(visible&&!document.hidden)video.play().catch(()=>{});
+else video.pause();
+}
+const videoObserver=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+const visible=entry.isIntersecting&&entry.intersectionRatio>=0.15;
+videoVisibility.set(entry.target,visible);
+updateVideoPlayback(entry.target,visible);
+});
+},{threshold:0.15});
+document.querySelectorAll('video.runtime-video').forEach(video=>videoObserver.observe(video));
+document.addEventListener('visibilitychange',()=>{
+videoVisibility.forEach((visible,video)=>updateVideoPlayback(video,visible));
+});
+
 const methodVideo=document.querySelector('#runtime-video');
 const methodButtons=document.querySelectorAll('[data-method-start]');
 function updateMethodChapter(){
