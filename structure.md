@@ -10,9 +10,10 @@
 - `src/components/ChangeBlindnessTest.astro` owns only the change-blindness task itself: its truthful perceptual framing, rotated isometric Canvas rendering, the user-adjustable blank-gap timer, hit testing, feedback, and reduced-motion controls. Broader research interpretation remains in the page that embeds it.
 - `src/lib/changeBlindnessScene.mjs` deterministically generates a 20-object mixed-primitive scene pair from a seed; one projection-visible target is sampled across balanced depth bands and then moves by at least one footprint, appears, disappears, is replaced, or changes colour.
 - `src/components/` also contains the shared site header.
-- `src/layouts/BaseLayout.astro` owns document metadata and global progressive enhancement.
+- `src/layouts/BaseLayout.astro` owns canonical URLs, description, Open Graph/Twitter metadata, optional social images and JSON-LD, plus global progressive enhancement.
 - `src/styles/global.css` defines the complete visual system, responsive layouts, dark mode, and reduced-motion behavior.
 - `public/media/` contains only media copied into the Astro output, including the MR-Compare figures and office demo video used by the project page.
+- `public/robots.txt` and `public/sitemap.xml` expose the preferred public URLs to search crawlers; page-specific canonical and structured metadata remain in Astro sources.
 - `.github/workflows/deploy.yml` builds static Astro output and deploys it to GitHub Pages.
 - `skills/astro-research-portfolio/` records the project-specific implementation and quality rules.
 - `tests/change-blindness.test.mjs` verifies deterministic generation, all five change modes, 20-object mixed-shape composition, continuous poses, footprint-relative displacement, colour isolation, projection visibility, and statistically balanced depth selection with Node's built-in test runner.

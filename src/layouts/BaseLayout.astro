@@ -1,7 +1,23 @@
 ---
 import "../styles/global.css";
-interface Props { title?: string; description?: string; }
-const { title = "Changrui Zhu · Spatial Computing Researcher", description = "Research in mixed reality, human perception, 3D reconstruction, and human-in-the-loop intelligent systems." } = Astro.props;
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: "website" | "article";
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
+}
+const {
+  title = "Changrui Zhu · Spatial Computing Researcher",
+  description = "Research in mixed reality, human perception, 3D reconstruction, and human-in-the-loop intelligent systems.",
+  image,
+  type = "website",
+  structuredData,
+} = Astro.props;
+const site = Astro.site ?? new URL("https://changruizhu96.github.io");
+const canonicalUrl = new URL(Astro.url.pathname, site).href;
+const socialImage = image ? new URL(image, site).href : undefined;
+const jsonLd = structuredData ? JSON.stringify(structuredData).replace(/</g, "\\u003c") : undefined;
 ---
 <!doctype html>
 <html lang="en">
@@ -10,8 +26,20 @@ const { title = "Changrui Zhu · Spatial Computing Researcher", description = "R
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#f7f6f2" />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:site_name" content="Changrui Zhu" />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    {socialImage && <meta property="og:image" content={socialImage} />}
+    <meta name="twitter:card" content={socialImage ? "summary_large_image" : "summary"} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {socialImage && <meta name="twitter:image" content={socialImage} />}
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>◌</text></svg>" />
     <title>{title}</title>
+    {jsonLd && <script is:inline type="application/ld+json" set:html={jsonLd} />}
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>

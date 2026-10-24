@@ -152,6 +152,11 @@ img { display: block; max-width: 100%; }
 
 .project-hero { padding: 4.5rem 0 3.5rem; }
 .project-hero h1 { margin: 3.5rem 0 1rem; font-size: clamp(3.4rem, 8vw, 6.5rem); font-weight: 500; letter-spacing: -.065em; line-height: .92; }
+.project-toolkit-title { max-width: 980px; margin: 1.25rem 0 0; font-size: clamp(1.9rem, 3.4vw, 3.45rem); font-weight: 500; letter-spacing: -.045em; line-height: 1.05; }
+.project-toolkit-lead { max-width: 780px; margin: 1rem 0 0; color: var(--muted); font-size: clamp(1.05rem, 1.5vw, 1.3rem); line-height: 1.55; }
+.project-paper-summary { margin-top: 2.75rem; padding-top: 2rem; border-top: 1px solid var(--line); }
+.project-paper-summary .kicker { margin: 0 0 .85rem; }
+.project-paper-summary .project-paper-title { margin-top: 0; font-size: clamp(1.15rem, 1.7vw, 1.6rem); }
 .project-paper-title { max-width: 980px; margin: 1.5rem 0 0; font-size: clamp(1.45rem, 2.3vw, 2.35rem); letter-spacing: -.035em; line-height: 1.2; }
 .project-paper-status { width: fit-content; margin: 1.35rem 0 0; padding: .55rem .75rem; background: var(--ink); color: var(--paper); font: 500 clamp(.88rem, 1.15vw, 1rem)/1.4 var(--mono); letter-spacing: .035em; text-transform: uppercase; }
 .project-paper-award { display: block; margin-top: .65rem; border: 1px solid var(--ink); background: transparent; color: var(--ink); font-size: clamp(.78rem, 1vw, .9rem); }

@@ -11,25 +11,48 @@ const bibtex = `@misc{zhu2026mrcompare,
       primaryClass={cs.GR},
       url={https://arxiv.org/abs/2607.20325},
 }`;
+const toolkitDescription = "MR-Compare is a self-contained 3DGS toolkit for Unity XR and mixed reality, with complete VR rendering, Meta Quest physical-world registration, passthrough interaction, and spatial anchors.";
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  name: "MR-Compare",
+  alternateName: "MR-Compare: 3DGS Toolkit for Unity XR and Mixed Reality",
+  description: toolkitDescription,
+  url: "https://changruizhu96.github.io/work/mr-compare/",
+  codeRepository: "https://github.com/changruizhu96/MR-Compare",
+  programmingLanguage: "C#",
+  runtimePlatform: ["Unity 6000", "OpenXR", "Meta Quest"],
+  license: "https://opensource.org/license/mit",
+  citation: "https://arxiv.org/abs/2607.20325",
+  author: { "@type": "Person", name: "Changrui Zhu", url: "https://changruizhu96.github.io/" },
+  keywords: ["3D Gaussian Splatting", "3DGS", "Unity XR", "Mixed Reality", "Virtual Reality", "Meta Quest"],
+};
 ---
 <BaseLayout
-  title="MR-Compare: A Mixed-Reality Framework for Spatially Grounded Visual Comparison of 3D Gaussian Splatting and Mesh Reconstructions with the Physical Environment · Changrui Zhu"
-  description="MR-Compare is a spatially grounded mixed reality framework for comparing 3D Gaussian Splatting and mesh reconstructions with the physical environment."
+  title="MR-Compare: 3DGS Toolkit for Unity XR and Mixed Reality"
+  description={toolkitDescription}
+  image="/media/mr-compare/cover.png"
+  structuredData={structuredData}
 >
   <SiteHeader current="work" />
   <main id="main" class="project-page">
     <header class="project-hero project-paper-hero shell">
       <h1 data-reveal>MR-Compare</h1>
-      <p class="project-paper-title" data-reveal>A Mixed-Reality Framework for Spatially Grounded Visual Comparison of 3D Gaussian Splatting and Mesh Reconstructions with the Physical Environment</p>
-      <p class="project-paper-status" data-reveal>IEEE ISMAR 2026 · TVCG Paper</p>
-      <a class="project-paper-status project-paper-award" href="https://www.ieeeismar.net/2026/awards/" target="_blank" rel="noreferrer" data-reveal>Best Paper Award · Honorable Mention ↗</a>
-      <p class="project-authors" data-reveal>
-        <a href="mailto:changrui.zhu.19@ucl.ac.uk">Changrui Zhu</a><sup>1</sup>,
-        <a href="mailto:ernst.kruijff@h-brs.de">Ernst Kruijff</a><sup>2</sup>,
-        <a href="mailto:pengju.zhang.21@ucl.ac.uk">Pengju Zhang</a><sup>1</sup>,
-        <a href="mailto:s.julier@ucl.ac.uk">Simon Julier</a><sup>1</sup>
-      </p>
-      <p class="project-affiliations" data-reveal><sup>1</sup>University College London <span>·</span> <sup>2</sup>Hochschule Bonn-Rhein-Sieg</p>
+      <p class="project-toolkit-title" data-reveal>3DGS Toolkit for Unity XR and Mixed Reality</p>
+      <p class="project-toolkit-lead" data-reveal>Complete VR rendering, extended to spatially grounded MR registration, passthrough, and interaction on Meta Quest.</p>
+      <div class="project-paper-summary" data-reveal>
+        <p class="kicker">Research publication</p>
+        <p class="project-paper-title">A Mixed-Reality Framework for Spatially Grounded Visual Comparison of 3D Gaussian Splatting and Mesh Reconstructions with the Physical Environment</p>
+        <p class="project-paper-status">IEEE ISMAR 2026 · TVCG Paper</p>
+        <a class="project-paper-status project-paper-award" href="https://www.ieeeismar.net/2026/awards/" target="_blank" rel="noreferrer">Best Paper Award · Honorable Mention ↗</a>
+        <p class="project-authors">
+          <a href="mailto:changrui.zhu.19@ucl.ac.uk">Changrui Zhu</a><sup>1</sup>,
+          <a href="mailto:ernst.kruijff@h-brs.de">Ernst Kruijff</a><sup>2</sup>,
+          <a href="mailto:pengju.zhang.21@ucl.ac.uk">Pengju Zhang</a><sup>1</sup>,
+          <a href="mailto:s.julier@ucl.ac.uk">Simon Julier</a><sup>1</sup>
+        </p>
+        <p class="project-affiliations"><sup>1</sup>University College London <span>·</span> <sup>2</sup>Hochschule Bonn-Rhein-Sieg</p>
+      </div>
       <nav class="project-resource-links" aria-label="Project resources" data-reveal>
         <a class="project-resource-link" href="https://arxiv.org/abs/2607.20325" target="_blank" rel="noreferrer">arXiv ↗</a>
         <a class="project-resource-link" href="https://github.com/changruizhu96/MR-Compare" target="_blank" rel="noreferrer">Code ↗</a>
