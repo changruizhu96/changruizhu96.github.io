@@ -11,13 +11,12 @@ const bibtex = `@misc{zhu2026mrcompare,
       primaryClass={cs.GR},
       url={https://arxiv.org/abs/2607.20325},
 }`;
-const toolkitDescription = "MR-Compare is the research foundation of Unity XR 3DGS Toolkit, a self-contained Unity project for VR rendering, mixed-reality registration, passthrough interaction, and spatial anchors on Meta Quest.";
+const projectDescription = "MR-Compare is a mixed-reality framework for spatially grounded visual comparison of 3D Gaussian Splatting and mesh reconstructions with the physical environment.";
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "SoftwareSourceCode",
-  name: "Unity XR 3DGS Toolkit",
-  alternateName: "Unity-XR-3DGS-Toolkit",
-  description: toolkitDescription,
+  name: "MR-Compare",
+  description: projectDescription,
   url: "https://changruizhu96.github.io/work/mr-compare/",
   codeRepository: "https://github.com/changruizhu96/Unity-XR-3DGS-Toolkit",
   programmingLanguage: "C#",
@@ -29,8 +28,8 @@ const structuredData = {
 };
 ---
 <BaseLayout
-  title="MR-Compare | Unity XR 3DGS Toolkit for VR and Mixed Reality"
-  description={toolkitDescription}
+  title="MR-Compare · Changrui Zhu"
+  description={projectDescription}
   image="/media/mr-compare/cover.png"
   structuredData={structuredData}
 >
@@ -38,8 +37,6 @@ const structuredData = {
   <main id="main" class="project-page">
     <header class="project-hero project-paper-hero shell">
       <h1 data-reveal>MR-Compare</h1>
-      <p class="project-toolkit-title" data-reveal>Research foundation of Unity XR 3DGS Toolkit</p>
-      <p class="project-toolkit-lead" data-reveal>3D Gaussian Splatting for VR and mixed reality in Unity. Originally developed for MR-Compare, the toolkit is maintained in a dedicated repository for ongoing development beyond the paper; this page documents the research system and its evaluation.</p>
       <div class="project-paper-summary" data-reveal>
         <p class="kicker">Research publication</p>
         <p class="project-paper-title">A Mixed-Reality Framework for Spatially Grounded Visual Comparison of 3D Gaussian Splatting and Mesh Reconstructions with the Physical Environment</p>
@@ -55,10 +52,11 @@ const structuredData = {
       </div>
       <nav class="project-resource-links" aria-label="Project resources" data-reveal>
         <a class="project-resource-link" href="https://arxiv.org/abs/2607.20325" target="_blank" rel="noreferrer">arXiv ↗</a>
-        <a class="project-resource-link" href="https://github.com/changruizhu96/Unity-XR-3DGS-Toolkit" target="_blank" rel="noreferrer">Toolkit / Code ↗</a>
+        <a class="project-resource-link" href="https://github.com/changruizhu96/Unity-XR-3DGS-Toolkit" target="_blank" rel="noreferrer">Code ↗</a>
         <a class="project-resource-link" href="https://github.com/changruizhu96/Unity-XR-3DGS-Toolkit#readme" target="_blank" rel="noreferrer">Documentation ↗</a>
         <a class="project-resource-link" href="#demo">Demo ↓</a>
       </nav>
+      <p class="project-toolkit-lead" data-reveal>MR-Compare’s code is maintained in the Unity XR 3DGS Toolkit repository, which also includes development beyond the paper.</p>
     </header>
 
     <figure class="project-figure project-figure-primary" data-reveal>
