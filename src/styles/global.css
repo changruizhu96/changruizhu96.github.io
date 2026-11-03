@@ -171,9 +171,12 @@ img { display: block; max-width: 100%; }
 .project-affiliations { margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.6; }
 .project-affiliations span { margin: 0 .6rem; }
 .project-resource-links { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 2rem; }
-.project-resource-link { padding: .5rem .75rem; border: 1px solid var(--line); font: .72rem/1.4 var(--mono); text-transform: uppercase; transition: color .2s ease, background-color .2s ease; }
+.project-resource-link { display: inline-flex; align-items: center; gap: .5rem; padding: .5rem .75rem; border: 1px solid var(--line); font: .72rem/1.4 var(--mono); text-transform: uppercase; transition: color .2s ease, background-color .2s ease; }
+.project-resource-icon { width: 1rem; height: 1rem; flex: 0 0 auto; }
 .project-resource-link:hover { background: var(--ink); color: var(--paper); }
 .project-toolkit-note { max-width: 740px; margin: 1.25rem 0 0; color: var(--muted); font-size: .95rem; line-height: 1.7; }
+.project-toolkit-note p { margin: .4rem 0 0; }
+.project-toolkit-note strong { color: var(--ink); font-weight: 600; }
 .project-figure { width: min(980px, calc(100vw - 48px)); margin: 1rem auto 5rem; }
 .project-figure img { width: 100%; height: auto; max-height: none; object-fit: contain; background: #fbfbfa; }
 .project-figure figcaption { width: 100%; margin: .8rem auto 0; display: flex; justify-content: space-between; gap: 1.5rem; color: var(--muted); font: .7rem/1.6 var(--mono); text-transform: uppercase; }

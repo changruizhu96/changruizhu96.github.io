@@ -1,5 +1,7 @@
 # Project memory
 
+- 2026-11-03: Match the hero's repository explanation labels exactly to `Research repository` and `Toolkit repository`, with one line mapping each to its repository name and purpose. Add inline arXiv/GitHub brand icons and document/play icons to the five hero resources, retaining visible text and hiding decorative SVGs from assistive technology.
+
 - 2026-11-03: Rebase the toolkit presentation onto the current remote homepage, preserving LEGO-SCD, publication awards, profile layout, and SEO metadata. The project hero's `Research overview` points to `#abstract`; its SoftwareSourceCode repository identifies the MR-Compare research implementation, while the toolkit has a separate explicit repository link. This supersedes the earlier single-repository routing decision.
 
 - 2026-11-03: Label the two GitHub destinations consistently as `Research repository` (MR-Compare) and `Toolkit repository` (Unity XR 3DGS Toolkit) on both pages. The former is the research reference implementation with post-paper maintenance, not an exact evaluated-paper snapshot; the latter is the entry point for general-purpose XR development and ongoing toolkit updates. Both repositories remain separate, as verified from GitHub metadata and the MR-Compare README.
