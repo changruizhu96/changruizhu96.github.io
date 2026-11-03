@@ -1,5 +1,11 @@
 # Project memory
 
+- 2026-11-03: Rebase the toolkit presentation onto the current remote homepage, preserving LEGO-SCD, publication awards, profile layout, and SEO metadata. The project hero's `Research overview` points to `#abstract`; its SoftwareSourceCode repository identifies the MR-Compare research implementation, while the toolkit has a separate explicit repository link. This supersedes the earlier single-repository routing decision.
+
+- 2026-11-03: Label the two GitHub destinations consistently as `Research repository` (MR-Compare) and `Toolkit repository` (Unity XR 3DGS Toolkit) on both pages. The former is the research reference implementation with post-paper maintenance, not an exact evaluated-paper snapshot; the latter is the entry point for general-purpose XR development and ongoing toolkit updates. Both repositories remain separate, as verified from GitHub metadata and the MR-Compare README.
+
+- 2026-11-03: Present Unity XR 3DGS Toolkit as the maintained software extension of MR-Compare, based on its current GitHub README. Keep the MR-Compare paper, research repository, and evaluation intact; add a compact homepage software section plus project-page toolkit overview and VR/MR quick-start links. State the tested Windows PC + Meta Quest Link setup, and keep the shared toolkit name/URL in `src/data/site.ts`.
+
 - 2026-07-12: Began migration from the al-folio Jekyll template to a static Astro portfolio. The goal is to reduce build complexity and replace the conventional academic-homepage layout with a spatial-research narrative.
 - 2026-07-12: Keep the first Astro implementation dependency-light: Astro, TypeScript, native CSS, and a small Canvas enhancement. Do not add React, Vue, WebGL frameworks, or a CMS without a concrete requirement.
 - 2026-07-12: Continue using GitHub Pages. Astro produces static output and the official Astro deployment action replaces the former Ruby, ImageMagick, Jupyter, and PurgeCSS build chain.

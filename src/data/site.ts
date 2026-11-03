@@ -29,6 +29,11 @@ export const site = {
   ],
 };
 
+export const xrToolkit = {
+  name: "Unity XR 3DGS Toolkit",
+  href: "https://github.com/changruizhu96/Unity-XR-3DGS-Toolkit",
+};
+
 const curatedPublications = [
   {
     year: "2026",
