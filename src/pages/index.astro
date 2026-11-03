@@ -41,25 +41,11 @@ const recentPublications = publications.slice(0, 3);
             <a class="text-link" href={`${base}/work/mr-compare/`}>Explore the project <span aria-hidden="true">↗</span></a>
             <a class="text-link" href="https://github.com/changruizhu96/MR-Compare" target="_blank" rel="noreferrer">Research repository <span aria-hidden="true">↗</span></a>
           </div>
+          <p class="work-toolkit">Building on MR-Compare, the <a href={xrToolkit.href} target="_blank" rel="noreferrer">{xrToolkit.name} <span aria-hidden="true">↗</span></a> provides maintained tools for general-purpose Unity XR development.</p>
         </div>
         <a class="work-visual work-visual-concept" href={`${base}/work/mr-compare/`} data-reveal aria-label="Read the MR-Compare project story">
           <img src={`${base}/media/mr-compare/cover.png`} alt="Conceptual diagram of MR-Compare connecting the physical world, 3D Gaussian Splatting, and video see-through" width="1129" height="1128" loading="eager" />
         </a>
-      </div>
-    </section>
-
-    <section class="toolkit-summary shell section-rule" aria-labelledby="toolkit-title">
-      <div data-reveal>
-        <p class="kicker">Open-source toolkit · Building on MR-Compare</p>
-        <h2 id="toolkit-title">{xrToolkit.name}</h2>
-      </div>
-      <div data-reveal>
-        <p>Building on the MR-Compare research implementation, this toolkit is the home for general-purpose Unity XR + 3D Gaussian Splatting development and ongoing updates. Render 3DGS in VR, or align 3DGS and mesh reconstructions with the physical world for mixed-reality comparison.</p>
-        <p class="toolkit-platform">Tested on Windows PC + Meta Quest Link.</p>
-        <div class="link-row">
-          <a class="text-link" href={xrToolkit.href} target="_blank" rel="noreferrer">Toolkit repository <span aria-hidden="true">↗</span></a>
-          <a class="text-link" href={`${base}/work/mr-compare/#toolkit`}>About the toolkit <span aria-hidden="true">↗</span></a>
-        </div>
       </div>
     </section>
 
