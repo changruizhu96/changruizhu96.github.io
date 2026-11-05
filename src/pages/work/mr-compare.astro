@@ -101,12 +101,20 @@ const structuredData = {
     <section class="project-academic-section shell section-rule" id="demo">
       <header class="project-academic-heading" data-reveal><p class="kicker">02 · Media</p><h2>Demo</h2></header>
       <div class="project-prose" data-reveal>
-        <p>This demo shows the final MR-Compare outcome in an office scene. Heterogeneous 3D reconstructions have already been registered to the physical space, allowing the user to switch between the aligned reconstruction and the live environment, and to inspect the result with the 3D Slider.</p>
+        <h3 class="project-demo-title">Metric-scale reconstruction comparison</h3>
+        <p>This demo uses reconstructions that are already at metric scale. They have been registered to the physical office, allowing the user to switch between the aligned reconstruction and the live environment, and to inspect the result with the 3D Slider.</p>
         <video class="project-video" controls muted playsinline preload="metadata" data-autoplay-on-view aria-label="MR-Compare office demonstration">
           <source src={`${base}/media/mr-compare/office-demo.mp4`} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         <p class="project-media-caption">Final outcome demo: five registered reconstruction outputs aligned with the physical office, including standard 3DGS, RealityScan dense mesh, Scaniverse 3DGS splat, Polycam mesh, and 3DGS-MCMC. The demo shows switching between reconstructions and visualization with the 3D Slider.</p>
+        <h3 class="project-demo-title" id="on-the-fly">Challenging case: non-metric 3DGS alignment</h3>
+        <p>This challenging case combines a non-metric-scale 3DGS reconstruction with visible reconstruction artifacts. Using live headset depth scanning in on-the-fly mode, MR-Compare aligns the reconstruction with the physical environment despite the initial scale mismatch and imperfect reconstruction.</p>
+        <video class="project-video" controls muted playsinline preload="none" width="1920" height="1080" poster={`${base}/media/mr-compare/on-the-fly-poster.jpg`} aria-label="MR-Compare on-the-fly alignment of a non-metric 3DGS reconstruction">
+          <source src={`${base}/media/mr-compare/on-the-fly-demo.mp4`} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <p class="project-media-caption">On-the-fly depth scanning, scale estimation, and alignment, followed by comparison between the registered 3DGS reconstruction and video see-through (VST). The scanning segment is shown at 2× speed.</p>
       </div>
     </section>
 

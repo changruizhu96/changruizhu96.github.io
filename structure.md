@@ -12,7 +12,7 @@
 - `src/components/` also contains the shared site header.
 - `src/layouts/BaseLayout.astro` owns canonical URLs, description, Open Graph/Twitter metadata, optional social images and JSON-LD, plus global progressive enhancement.
 - `src/styles/global.css` defines the complete visual system, responsive layouts, dark mode, and reduced-motion behavior.
-- `public/media/` contains only media copied into the Astro output, including the MR-Compare figures and office demo video used by the project page.
+- `public/media/` contains only media copied into the Astro output, including the MR-Compare figures, metric-scale office comparison video, and non-metric on-the-fly alignment video with its poster. Both demos share the project page's Demo section; the homepage links directly to the challenging case at `#on-the-fly`.
 - `public/robots.txt` and `public/sitemap.xml` expose the preferred public URLs to search crawlers; page-specific canonical and structured metadata remain in Astro sources.
 - `.github/workflows/deploy.yml` builds static Astro output and deploys it to GitHub Pages.
 - `skills/astro-research-portfolio/` records the project-specific implementation and quality rules.
