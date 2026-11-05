@@ -110,7 +110,7 @@ const structuredData = {
         <p class="project-media-caption">Final outcome demo: five registered reconstruction outputs aligned with the physical office, including standard 3DGS, RealityScan dense mesh, Scaniverse 3DGS splat, Polycam mesh, and 3DGS-MCMC. The demo shows switching between reconstructions and visualization with the 3D Slider.</p>
         <h3 class="project-demo-title" id="on-the-fly">Challenging case: non-metric 3DGS alignment</h3>
         <p>This challenging case combines a non-metric-scale 3DGS reconstruction with visible reconstruction artifacts. Using live headset depth scanning in on-the-fly mode, MR-Compare aligns the reconstruction with the physical environment despite the initial scale mismatch and imperfect reconstruction.</p>
-        <video class="project-video" controls muted playsinline preload="none" width="1920" height="1080" poster={`${base}/media/mr-compare/on-the-fly-poster.jpg`} aria-label="MR-Compare on-the-fly alignment of a non-metric 3DGS reconstruction">
+        <video class="project-video" controls muted playsinline preload="none" data-autoplay-on-view width="1920" height="1080" poster={`${base}/media/mr-compare/on-the-fly-poster.jpg`} aria-label="MR-Compare on-the-fly alignment of a non-metric 3DGS reconstruction">
           <source src={`${base}/media/mr-compare/on-the-fly-demo.mp4`} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
@@ -185,18 +185,19 @@ const structuredData = {
   </main>
   <footer class="site-footer shell"><p>Changrui Zhu</p><a href={`${base}/`}>Back to index ↑</a><p>© {new Date().getFullYear()}</p></footer>
   <script>
-    const demoVideo = document.querySelector<HTMLVideoElement>("[data-autoplay-on-view]");
+    const demoVideos = document.querySelectorAll<HTMLVideoElement>("[data-autoplay-on-view]");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-    if (demoVideo && !reducedMotion.matches) {
+    if (!reducedMotion.matches) {
       const autoplayObserver = new IntersectionObserver((entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) void demoVideo.play().catch(() => {});
+          const demoVideo = entry.target as HTMLVideoElement;
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.5) void demoVideo.play().catch(() => {});
           else demoVideo.pause();
         }
       }, { threshold: 0.5 });
 
-      autoplayObserver.observe(demoVideo);
+      demoVideos.forEach((demoVideo) => autoplayObserver.observe(demoVideo));
     }
   </script>
 </BaseLayout>

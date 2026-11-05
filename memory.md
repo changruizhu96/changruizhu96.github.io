@@ -1,6 +1,8 @@
 # Project memory
 
-- 2026-11-05: Keep the original metric-scale reconstruction comparison first in MR-Compare's Demo section, followed by a challenging non-metric 3DGS alignment case with reconstruction artifacts and live headset depth scanning. The input conditions are confirmed by the author; this demonstration does not extend the paper's quantitative claims. Link the new `#on-the-fly` subsection from the existing homepage feature. Use a web-encoded video and poster with manual playback; preserve the source recording.
+- 2026-11-05: Both MR-Compare demos use muted viewport autoplay: observe every marked video, play the corresponding target only when at least 50% visible, and pause it below that threshold. Respect reduced motion. This replaces manual-only playback for the challenging case; the previous single-element selector could only control the first demo.
+
+- 2026-11-05: Keep the original metric-scale reconstruction comparison first in MR-Compare's Demo section, followed by a challenging non-metric 3DGS alignment case with reconstruction artifacts and live headset depth scanning. The input conditions are confirmed by the author; this demonstration does not extend the paper's quantitative claims. Link the new `#on-the-fly` subsection from the existing homepage feature. Use a web-encoded video and poster with playback controls; preserve the source recording.
 
 - 2026-11-03: Keep Unity XR 3DGS Toolkit subordinate to MR-Compare on the homepage: a short extension note and an explicitly named repository link inside the MR-Compare feature replace the standalone toolkit section. Retain the detailed toolkit overview on the project page. LEGO-SCD's Code/arXiv links use the same inline brand icons as MR-Compare.
 
