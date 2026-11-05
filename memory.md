@@ -1,6 +1,6 @@
 # Project memory
 
-- 2026-11-05: Present the leading MR-Compare demo at the full shell width with a short heading and one caption below, removing the long pre-video explanation. Reduce hero/demo spacing to surface the result sooner. Keep the system diagram at prose width, with its full-resolution link below the caption, so the figure and method text align; other comparison figures retain their wide layout.
+- 2026-11-05: Present the leading MR-Compare demo at the full shell width with a short heading and one caption below, removing the long pre-video explanation. Reduce hero/demo spacing to surface the result sooner. Keep the system diagram at prose width, with its full-resolution link below the caption, so the figure and method text align; Visual comparison figures now follow the same prose-width layout, with stacked captions and full-resolution links.
 
 - 2026-11-05: Lead the MR-Compare page with the original metric-scale demo after the hero, then research overview, challenging non-metric demo, system overview, visual comparison, evaluation, toolkit, and citation. Move the pipeline diagram into System overview before the five-stage explanation. Keep each media asset once, preserve #demo/#abstract/#on-the-fly links and both videos' viewport autoplay. This supersedes grouping both videos in one Demo section.
 

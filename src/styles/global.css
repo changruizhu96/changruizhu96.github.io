@@ -198,12 +198,10 @@ img { display: block; max-width: 100%; }
 .project-method-list h3 { margin: 0 0 .45rem; font-size: 1.15rem; font-weight: 500; line-height: 1.3; }
 .project-method-list p { margin: 0; color: var(--muted); line-height: 1.7; }
 .project-inline-figure { margin: 2rem 0 0; }
-.project-inline-figure-wide { width: min(960px, calc(100vw - 260px)); }
 .project-inline-figure-detail { margin-top: 3.5rem; }
 .project-inline-figure img { width: 100%; height: auto; object-fit: contain; background: #fbfbfa; }
-.project-inline-figure figcaption { display: flex; justify-content: space-between; gap: 1.5rem; margin-top: .8rem; color: var(--muted); font: .7rem/1.6 var(--mono); text-transform: uppercase; }
+.project-inline-figure figcaption { display: flex; flex-direction: column; align-items: flex-start; gap: .65rem; margin-top: .8rem; color: var(--muted); font: .7rem/1.6 var(--mono); text-transform: uppercase; }
 .project-inline-figure figcaption a { flex: 0 0 auto; padding-bottom: .1rem; border-bottom: 1px solid currentColor; color: var(--ink); }
-.project-system-figure figcaption { flex-direction: column; align-items: flex-start; gap: .65rem; }
 .project-citation-label { margin-top: 2rem !important; font: .72rem/1.5 var(--mono) !important; text-transform: uppercase; }
 .project-bibtex { margin: .8rem 0 0; padding: 1rem; overflow-x: auto; border: 1px solid var(--line); background: rgba(127,127,127,.06); font: .72rem/1.6 var(--mono); white-space: pre; }
 .not-found { min-height: calc(100vh - 84px); display: flex; flex-direction: column; justify-content: center; }
@@ -241,7 +239,6 @@ img { display: block; max-width: 100%; }
   .about-copy > p:not(.kicker) { margin-left: 0; }
   .project-hero { padding-top: 3.5rem; } .project-hero h1 { margin-top: 3rem; }
   .project-figure { width: var(--shell); margin-bottom: 4rem; }
-  .project-inline-figure-wide { width: 100%; }
   .project-figure figcaption, .project-inline-figure figcaption { align-items: flex-start; flex-direction: column; gap: .65rem; }
   .site-footer { grid-template-columns: 1fr auto; } .site-footer p:nth-child(2) { display: none; }
 }
