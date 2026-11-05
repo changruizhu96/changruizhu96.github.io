@@ -12,6 +12,7 @@
 - `src/components/` also contains the shared site header.
 - `src/layouts/BaseLayout.astro` owns canonical URLs, description, Open Graph/Twitter metadata, optional social images and JSON-LD, plus global progressive enhancement.
 - `src/styles/global.css` defines the complete visual system, responsive layouts, dark mode, and reduced-motion behavior.
+- The MR-Compare page script adds a 3x pointer-following magnifier to its two Visual comparison images on hover-capable fine-pointer devices, using the existing image sources; touch and keyboard users retain the full-resolution links.
 - `public/media/` contains only media copied into the Astro output, including the MR-Compare figures, metric-scale office comparison video, and non-metric on-the-fly alignment video with its poster. The original demo leads the project page at `#demo`; the challenging case follows the research overview and remains linked from the homepage at `#on-the-fly`. The pipeline figure is in `#method` before the five-stage explanation.
 - `public/robots.txt` and `public/sitemap.xml` expose the preferred public URLs to search crawlers; page-specific canonical and structured metadata remain in Astro sources.
 - `.github/workflows/deploy.yml` builds static Astro output and deploys it to GitHub Pages.

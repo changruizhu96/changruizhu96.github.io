@@ -139,12 +139,19 @@ const structuredData = {
       <header class="project-academic-heading" data-reveal><p class="kicker">05 · Output</p><h2>Visual comparison</h2></header>
       <div class="project-prose" data-reveal>
         <p>The system is designed for situations where the physical room is still accessible but the user also has reconstructed digital versions of that room. MR-Compare registers each reconstruction to the live MR coordinate system, so the user can inspect where a reconstruction agrees with, deviates from, or visually complements the current physical environment.</p>
+        <p class="comparison-magnifier-hint">Move your pointer over either image to magnify details.</p>
         <figure class="project-inline-figure">
-          <img src={`${base}/media/mr-compare/visual-comparison-overview.png`} alt="Two physical room views compared across five reconstruction workflows" width="4237" height="1374" loading="lazy" />
+          <div class="comparison-magnifier">
+            <img src={`${base}/media/mr-compare/visual-comparison-overview.png`} alt="Two physical room views compared across five reconstruction workflows" width="4237" height="1374" loading="lazy" draggable="false" />
+            <span class="comparison-lens" aria-hidden="true"></span>
+          </div>
           <figcaption><span>High-resolution comparison from the paper: two physical viewpoints shown across the evaluated reconstruction workflows.</span><a href={`${base}/media/mr-compare/visual-comparison-overview.png`} target="_blank" rel="noreferrer">Open full resolution ↗</a></figcaption>
         </figure>
         <figure class="project-inline-figure project-inline-figure-detail">
-          <img src={`${base}/media/mr-compare/visual-comparison-room-views.png`} alt="Expanded grid of registered comparison views across two rooms and five reconstruction workflows" width="4237" height="4501" loading="lazy" />
+          <div class="comparison-magnifier">
+            <img src={`${base}/media/mr-compare/visual-comparison-room-views.png`} alt="Expanded grid of registered comparison views across two rooms and five reconstruction workflows" width="4237" height="4501" loading="lazy" draggable="false" />
+            <span class="comparison-lens" aria-hidden="true"></span>
+          </div>
           <figcaption><span>Extended comparison across two rooms: additional viewpoints show reconstruction behaviour across local geometry, surfaces, and viewing directions.</span><a href={`${base}/media/mr-compare/visual-comparison-room-views.png`} target="_blank" rel="noreferrer">Open full resolution ↗</a></figcaption>
         </figure>
       </div>
@@ -188,6 +195,36 @@ const structuredData = {
   </main>
   <footer class="site-footer shell"><p>Changrui Zhu</p><a href={`${base}/`}>Back to index ↑</a><p>© {new Date().getFullYear()}</p></footer>
   <script>
+    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      document.querySelector("#comparison")?.classList.add("has-magnifier");
+      document.querySelectorAll<HTMLElement>(".comparison-magnifier").forEach((frame) => {
+        const image = frame.querySelector<HTMLImageElement>("img")!;
+        const lens = frame.querySelector<HTMLElement>(".comparison-lens")!;
+        const hideLens = () => { lens.style.display = "none"; };
+
+        frame.addEventListener("pointermove", (event) => {
+          if (event.pointerType === "touch" || !image.complete || !image.naturalWidth) return;
+          const bounds = image.getBoundingClientRect();
+          const size = Math.min(180, bounds.width, bounds.height);
+          const radius = size / 2;
+          const x = Math.max(0, Math.min(event.clientX - bounds.left, bounds.width));
+          const y = Math.max(0, Math.min(event.clientY - bounds.top, bounds.height));
+          const zoom = 3;
+          lens.style.width = lens.style.height = `${size}px`;
+          lens.style.left = `${Math.max(0, Math.min(x - radius, bounds.width - size))}px`;
+          lens.style.top = `${Math.max(0, Math.min(y - radius, bounds.height - size))}px`;
+          lens.style.backgroundImage = `url("${image.currentSrc}")`;
+          lens.style.backgroundSize = `${bounds.width * zoom}px ${bounds.height * zoom}px`;
+          lens.style.backgroundPosition = `${Math.min(0, Math.max(size - bounds.width * zoom, radius - x * zoom))}px ${Math.min(0, Math.max(size - bounds.height * zoom, radius - y * zoom))}px`;
+          lens.style.display = "block";
+        });
+        frame.addEventListener("pointerleave", hideLens);
+        frame.addEventListener("pointercancel", hideLens);
+        window.addEventListener("scroll", hideLens, { passive: true });
+        window.addEventListener("resize", hideLens);
+      });
+    }
+
     const demoVideos = document.querySelectorAll<HTMLVideoElement>("[data-autoplay-on-view]");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
