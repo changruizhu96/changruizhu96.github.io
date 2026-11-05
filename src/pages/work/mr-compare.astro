@@ -82,16 +82,14 @@ const structuredData = {
       </div>
     </header>
 
-    <section class="project-academic-section shell section-rule" id="demo">
-      <header class="project-academic-heading" data-reveal><p class="kicker">01 · Media</p><h2>Demo</h2></header>
-      <div class="project-prose" data-reveal>
-        <h3 class="project-demo-title">Metric-scale reconstruction comparison</h3>
-        <p>This demo uses reconstructions that are already at metric scale. They have been registered to the physical office, allowing the user to switch between the aligned reconstruction and the live environment, and to inspect the result with the 3D Slider.</p>
-        <video class="project-video" controls muted playsinline preload="metadata" data-autoplay-on-view aria-label="MR-Compare office demonstration">
+    <section class="project-demo-feature shell section-rule" id="demo">
+      <header class="project-academic-heading" data-reveal><p class="kicker">01 · Media</p><h2>MR-Compare in action</h2></header>
+      <div data-reveal>
+        <video class="project-video" controls muted playsinline preload="metadata" width="1920" height="1080" data-autoplay-on-view aria-label="MR-Compare office demonstration">
           <source src={`${base}/media/mr-compare/office-demo.mp4`} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        <p class="project-media-caption">Final outcome demo: five registered reconstruction outputs aligned with the physical office, including standard 3DGS, RealityScan dense mesh, Scaniverse 3DGS splat, Polycam mesh, and 3DGS-MCMC. The demo shows switching between reconstructions and visualization with the 3D Slider.</p>
+        <p class="project-media-caption">Five metric-scale reconstructions, aligned with the physical room and explored using the 3D Slider.</p>
       </div>
     </section>
 
@@ -120,7 +118,7 @@ const structuredData = {
       <header class="project-academic-heading" data-reveal><p class="kicker">04 · Method</p><h2>System overview</h2></header>
       <div class="project-prose" data-reveal>
         <p>The diagram summarises MR-Compare as a single source-to-interaction pipeline. The system first converts heterogeneous reconstructions and headset observations into comparable point-cloud representations, then uses coarse-to-fine registration to place the reconstruction in the Quest world coordinate system before enabling in-headset visual comparison.</p>
-        <figure class="project-inline-figure project-inline-figure-wide">
+        <figure class="project-inline-figure project-system-figure">
           <img src={`${base}/media/mr-compare/teaser.png`} alt="The MR-Compare end-to-end pipeline" width="3390" height="2173" loading="lazy" />
           <figcaption>
             <span>MR-Compare registers mesh and 3D Gaussian Splatting reconstructions to the physical world, then supports in-headset visual comparison through a geometry-driven 3D Slider.</span>
