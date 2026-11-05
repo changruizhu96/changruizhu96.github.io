@@ -1,5 +1,7 @@
 # Project memory
 
+- 2026-11-05: Use one shared shell width for all MR-Compare section headings, prose, images, and videos on desktop and mobile. Place section headings above content, remove the narrower prose limits and video height caps, and preserve intrinsic media aspect ratios. This supersedes the earlier wider opening demo versus narrower academic body layout.
+
 - 2026-11-05: Add a pointer-following 3x circular magnifier to only the two Visual comparison images. Reuse their full-resolution sources, clamp the lens and sampled area at image edges, and hide on exit/scroll/resize. Enable on hover-capable fine pointers; retain full-resolution links for touch, keyboard, and no-JavaScript access. No easing is used so tracking follows the pointer directly.
 
 - 2026-11-05: Present the leading MR-Compare demo at the full shell width with a short heading and one caption below, removing the long pre-video explanation. Reduce hero/demo spacing to surface the result sooner. Keep the system diagram at prose width, with its full-resolution link below the caption, so the figure and method text align; Visual comparison figures now follow the same prose-width layout, with stacked captions and full-resolution links.
